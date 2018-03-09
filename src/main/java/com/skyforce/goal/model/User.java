@@ -1,5 +1,7 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.security.role.UserRole;
+import com.skyforce.goal.security.state.UserState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,13 +36,11 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Role role;
+    @Enumerated(EnumType.ORDINAL)
+    private UserRole role;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private State state;
+    @Enumerated(EnumType.ORDINAL)
+    private UserState state;
 
     @Column(name = "money")
     private BigDecimal money;

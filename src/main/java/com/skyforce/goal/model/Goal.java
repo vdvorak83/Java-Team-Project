@@ -1,5 +1,6 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.security.state.GoalState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +31,6 @@ public class Goal {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private State state;
+    @Enumerated(EnumType.ORDINAL)
+    private GoalState state;
 }
