@@ -18,6 +18,17 @@ create table if not exists user_states
 )
 ;
 
+-- Здесь хранятся адреса кошельков, и тех на которые надо кидать деньги,
+-- и те, на которые происходят вывод средств. Всё это для того, чтобы не дублировать адреса.
+create table if not exists wallets
+(
+	id bigserial not null
+		constraint wallets_pkey
+		primary key,
+	address varchar(100) not null
+)
+;
+
 -- Пользователи.
 create table if not exists users
 (
@@ -35,22 +46,11 @@ create table if not exists users
 		constraint users_states_id_fk
 			references user_states
 				on update cascade,
-	money numeric(12,10) default 0,
+	money numeric(15,10) default 0,
 	reg_date timestamp not null,
 	wallet bigint
 		constraint users_wallets_id_fk
 			references wallets
-)
-;
-
--- Здесь хранятся адреса кошельков, и тех на которые надо кидать деньги,
--- и те, на которые происходят вывод средств. Всё это для того, чтобы не дублировать адреса.
-create table if not exists wallets
-(
-	id bigserial not null
-		constraint wallets_pkey
-			primary key,
-	address varchar(100) not null
 )
 ;
 
@@ -63,7 +63,7 @@ create table if not exists transactions
 	user_id bigint not null
 		constraint transactions_users_id_fk
 			references users,
-	amount numeric(12,12) not null,
+	amount numeric(15,10) not null,
 	from_wallet bigint not null
 		constraint transactions_wallets_id_fk
 			references wallets,
@@ -94,7 +94,7 @@ create table if not exists goals
 		constraint goals_users_id_fk
 			references users,
 	description varchar(1500),
-	money numeric(12,12),
+	money numeric(15,10),
 	state smallint not null
 		constraint goals_goal_states_id_fk
 			references goal_states
@@ -137,6 +137,6 @@ create table if not exists money_history
 		constraint money_history_goals_id_fk
 			references goals,
 	direction boolean not null,
-	amount numeric(12,12) not null
+	amount numeric(15,10) not null
 )
 ;
