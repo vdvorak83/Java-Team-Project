@@ -35,5 +35,6 @@ public class Transaction {
     private Wallet toWallet;
 
     @Column(name = "date")
+    @Temporal(TemporalType.DATE)
     private Date date;
 }

@@ -93,31 +93,14 @@ create table if not exists goals
 	user_id bigserial not null
 		constraint goals_users_id_fk
 			references users,
+	name varchar(64) not null,
 	description varchar(1500),
 	money numeric(15,10),
 	state smallint not null
 		constraint goals_goal_states_id_fk
 			references goal_states
-				on update cascade
-)
-;
-
--- История изменеий статуса цели.
-create table if not exists goal_history
-(
-	id bigserial not null
-		constraint goal_history_pkey
-			primary key,
-	user_id bigint not null
-		constraint goal_history_users_id_fk
-			references users,
-	goal bigint not null
-		constraint goal_history_goals_id_fk
-			references goals
-				on update cascade on delete cascade,
-	before_state bigint not null,
-	after_state bigint not null,
-	date timestamp
+				on update cascade,
+	date_end timestamp
 )
 ;
 

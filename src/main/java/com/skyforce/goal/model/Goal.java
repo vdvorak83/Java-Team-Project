@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -33,4 +34,8 @@ public class Goal {
 
     @Enumerated(EnumType.ORDINAL)
     private GoalState state;
+
+    @Column(name = "date_end")
+    @Temporal(TemporalType.DATE)
+    private Date dateEnd;
 }

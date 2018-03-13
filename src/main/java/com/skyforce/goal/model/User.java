@@ -46,6 +46,7 @@ public class User {
     private BigDecimal money;
 
     @Column(name = "reg_date")
+    @Temporal(TemporalType.DATE)
     private Date regDate;
 
     @OneToOne
