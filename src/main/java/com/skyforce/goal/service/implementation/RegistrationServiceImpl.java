@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -36,8 +37,9 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .login(userRegistrationForm.getLogin())
                 .email(userRegistrationForm.getEmail())
                 .password(passwordEncoder.encode(userRegistrationForm.getPassword()))
-                .role(UserRole.USER)
-                .state(UserState.NOT_ACTIVE)
+                .regDate(new Date())
+                .role(UserRole.USER.getValue())
+                .state(UserState.NOT_ACTIVE.getValue())
                 .uuid(UUID.randomUUID().toString())
                 .build();
 
@@ -62,7 +64,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            user.setState(UserState.ACTIVE);
+            user.setState(UserState.ACTIVE.getValue());
             user.setUuid(null);
 
             userRepository.save(user);

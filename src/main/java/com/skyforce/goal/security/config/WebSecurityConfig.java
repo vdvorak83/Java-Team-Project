@@ -1,6 +1,7 @@
 package com.skyforce.goal.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationProvider authenticationProvider;
 
     @Autowired
+    @Qualifier("dataSource")
     private DataSource dataSource;
 
     @Autowired
@@ -36,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/register").permitAll()
+                .antMatchers("/confirm/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/").permitAll()

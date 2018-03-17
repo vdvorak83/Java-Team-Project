@@ -1,5 +1,18 @@
 package com.skyforce.goal.security.state;
 
 public enum GoalState {
-    INPROGRESS, COMPLETED, FAILED, DRAFT
+    INPROGRESS(1),
+    COMPLETED(2),
+    FAILED(3),
+    DRAFT(4);
+
+    private final int value;
+
+    GoalState(final int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
