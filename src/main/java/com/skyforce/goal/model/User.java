@@ -1,7 +1,5 @@
 package com.skyforce.goal.model;
 
-import com.skyforce.goal.security.role.UserRole;
-import com.skyforce.goal.security.state.UserState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,7 +50,7 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date regDate;
 
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name = "id")
-    private Wallet wallet;
+    private Wallet wallet;*/
 }
