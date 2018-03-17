@@ -42,6 +42,9 @@ public class User {
     @Enumerated(EnumType.ORDINAL)
     private UserState state;
 
+    @Column(name = "uuid", unique = true)
+    private String uuid;
+
     @Column(name = "money")
     private BigDecimal money;
 
