@@ -36,11 +36,14 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Enumerated(EnumType.ORDINAL)
-    private UserRole role;
+    @Column(name = "role_id")
+    private Integer role;
 
-    @Enumerated(EnumType.ORDINAL)
-    private UserState state;
+    @Column(name = "state_id")
+    private Integer state;
+
+    @Column(name = "uuid", unique = true)
+    private String uuid;
 
     @Column(name = "money")
     private BigDecimal money;
