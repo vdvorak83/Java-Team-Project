@@ -8,28 +8,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
-public class AuthenticationController {
+public class HomeController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/login")
-    public String login(Authentication authentication) {
+    @GetMapping("/")
+    public String root(Authentication authentication) {
         if (authentication != null) {
-            return "redirect:/";
+            User user = authenticationService.getUserByAuthentication(authentication);
+
+            if (user.getRole().equals(UserRole.ADMIN.getValue())) {
+                return "redirect:/admin";
+            } else if (user.getRole().equals(UserRole.USER.getValue())){
+                return "redirect:/user/profile";
+            }
         }
 
-        return "login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, Authentication authentication) {
-        if (authentication != null) {
-            request.getSession().invalidate();
-        }
-
-        return "redirect:/login";
+        return "homepage";
     }
 }
