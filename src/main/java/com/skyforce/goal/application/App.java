@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = "com.skyforce.goal.controller")
+@SpringBootApplication
 @ComponentScan("com.skyforce.goal")
 @EnableJpaRepositories(basePackages = "com.skyforce.goal.repository")
 @EntityScan(basePackages = "com.skyforce.goal.model")

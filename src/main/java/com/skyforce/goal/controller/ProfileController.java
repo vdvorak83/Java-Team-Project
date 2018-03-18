@@ -8,14 +8,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-@Controller("/user")
+@Controller
 public class ProfileController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @GetMapping("/profile")
-    public String getProfilePage(Authentication authentication, @ModelAttribute ModelMap model) {
-        model.addAttribute("name", authenticationService.getUserByAuthentication(authentication).getLogin());
+    @GetMapping("/user/profile")
+    public String getProfilePage(Authentication authentication, @ModelAttribute("model") ModelMap model) {
+        //model.addAttribute("name", authenticationService.getUserByAuthentication(authentication).getLogin());
+        model.put("name", authenticationService.getUserByAuthentication(authentication).getLogin());
+
+        System.out.println(authenticationService.getUserByAuthentication(authentication).getLogin());
 
         return "profile";
     }
