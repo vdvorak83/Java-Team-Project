@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="head">
+        <meta charset="UTF-8"/>
+
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
+
+        <style type="text/css">
+            body {
+                background-color: #FFFFFF;
+            }
+
+            .ui.menu .item img.logo {
+                margin-right: 1.5em;
+            }
+        </style>
+    </div>
+</head>
+
+<body>
+<div th:fragment="navbar">
+    <div class="ui fixed menu">
+        <div class="ui container">
+            <a href="#" class="header item">
+                <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png"/>
+                Project Name
+            </a>
+            <a href="#" class="item">Home</a>
+            <div class="ui simple dropdown item">
+                Dropdown <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="#">Link Item</a>
+                    <a class="item" href="#">Link Item</a>
+                    <div class="divider"></div>
+                    <div class="header">Header Item</div>
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Sub Menu
+                        <div class="menu">
+                            <a class="item" href="#">Link Item</a>
+                            <a class="item" href="#">Link Item</a>
+                        </div>
+                    </div>
+                    <a class="item" href="#">Link Item</a>
+                </div>
+            </div>
+        </div>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search..."/>
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item" th:href="@{/user/profile}" th:text="${login}">Profile</a>
+            <a class="ui item" th:href="@{/logout}">Log out</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

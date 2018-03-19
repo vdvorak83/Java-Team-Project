@@ -1,7 +1,5 @@
 package com.skyforce.goal.controller;
 
-import com.skyforce.goal.model.User;
-import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

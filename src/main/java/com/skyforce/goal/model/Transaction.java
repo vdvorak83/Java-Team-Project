@@ -23,7 +23,7 @@ public class Transaction {
     private Long id;
 
     @ManyToOne
-    private User userId;
+    private User user;
 
     @Column(name = "amount")
     private BigDecimal amount;

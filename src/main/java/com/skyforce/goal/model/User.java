@@ -50,7 +50,7 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date regDate;
 
-   /* @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "id")
     private Wallet wallet;*/
 }

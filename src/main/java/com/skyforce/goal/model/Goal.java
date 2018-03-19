@@ -24,7 +24,7 @@ public class Goal {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private User userId;
+    private User user;
 
     @Column(name = "description")
     private String description;
