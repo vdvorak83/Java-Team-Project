@@ -26,8 +26,9 @@ public class MoneyHistoryEntry {
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
+    @Column(name = "goal")
     @ManyToOne(cascade = CascadeType.ALL)
-    private User goal;
+    private Goal goal;
 
     @Column(name = "amount")
     private BigDecimal amount;
