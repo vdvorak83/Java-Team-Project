@@ -15,25 +15,25 @@ import java.util.Date;
 @ToString
 
 @Entity
-@Table(name = "transactions")
-public class Transaction {
+@Table(name = "history")
+public class MoneyHistoryEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "user_id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User goal;
 
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @ManyToOne
-    private Wallet fromWallet;
-
-    @ManyToOne
-    private Wallet toWallet;
+    @Column(name = "direction")
+    private boolean direction;
 
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
