@@ -107,19 +107,23 @@ create table if not exists goals
 -- Список транзакций с внутренним счётом пользователя. Сюда входят история отпарвки
 -- денег на цель, возврат денег после выполнения цели и отправка денег
 -- другим пользователям (если будет реализовано).
+-- direction = true - деньги получены после выполнения цели
+-- direction = false - деньги отправлены на цель
 create table if not exists money_history
 (
 	id bigserial not null
 		constraint money_history_pkey
-			primary key,
+		primary key,
 	user_id bigint not null
 		constraint money_history_users_id_fk
-			references users
-				on update cascade,
+		references users
+		on update cascade,
 	goal bigint not null
 		constraint money_history_goals_id_fk
-			references goals,
+		references goals
+		on update cascade,
 	direction boolean not null,
-	amount numeric(15,10) not null
+	amount numeric(15,10) not null,
+	date timestamp
 )
 ;

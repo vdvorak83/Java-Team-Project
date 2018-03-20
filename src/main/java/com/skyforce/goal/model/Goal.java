@@ -23,8 +23,9 @@ public class Goal {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User userId;
+    @Column(name = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 
     @Column(name = "description")
     private String description;
