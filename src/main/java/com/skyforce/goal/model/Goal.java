@@ -23,7 +23,6 @@ public class Goal {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
