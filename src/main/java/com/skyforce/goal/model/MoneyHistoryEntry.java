@@ -22,7 +22,6 @@ public class MoneyHistoryEntry {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
