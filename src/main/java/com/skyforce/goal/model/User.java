@@ -3,6 +3,8 @@ package com.skyforce.goal.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -18,7 +20,7 @@ import java.util.Date;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -27,6 +29,20 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    /*
+    @Size(min = 2, max = 50)
+    @Column(name = "name")
+    private String name;
+
+    @Size(min = 2, max = 50)
+    @Column(name = "last_name")
+    private String lastName;
+
+    @NotNull
+    @Column(name = "age")
+    private Integer age;
+    */
 
     @Column(name = "temp_password")
     private String tempPassword;

@@ -1,12 +1,13 @@
 package com.skyforce.goal.service.implementation;
 
-import com.skyforce.goal.form.UserRegistrationForm;
+import com.skyforce.goal.dto.UserDto;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.security.state.UserState;
 import com.skyforce.goal.service.RegistrationService;
 import com.skyforce.goal.util.SmtpMailSender;
+import com.skyforce.goal.validation.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,11 +33,16 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public User register(UserRegistrationForm userRegistrationForm) {
+    public User register(UserDto userDto) throws EmailExistsException {
+        if (emailExists(userDto.getEmail())) {
+            throw new EmailExistsException("There is an account with that e-mail address: " +
+                    userDto.getEmail());
+        }
+
         User newUser = User.builder()
-                .login(userRegistrationForm.getLogin())
-                .email(userRegistrationForm.getEmail())
-                .password(passwordEncoder.encode(userRegistrationForm.getPassword()))
+                .login(userDto.getLogin())
+                .email(userDto.getEmail())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .regDate(new Date())
                 .role(UserRole.USER.getValue())
                 .state(UserState.NOT_ACTIVE.getValue())
@@ -69,5 +75,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public boolean emailExists(String email) {
+        Optional<User> optionalUser = userRepository.findUserByEmail(email);
+
+        return optionalUser.isPresent();
     }
 }

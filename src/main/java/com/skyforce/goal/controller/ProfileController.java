@@ -16,7 +16,6 @@ public class ProfileController {
 
     @GetMapping("/user/profile")
     public String getProfilePage(Authentication authentication, Model model) {
-        //model.addAttribute("name", authenticationService.getUserByAuthentication(authentication).getLogin());
         model.addAttribute("login", authenticationService.getUserByAuthentication(authentication).getLogin());
 
         System.out.println(authenticationService.getUserByAuthentication(authentication).getLogin());
