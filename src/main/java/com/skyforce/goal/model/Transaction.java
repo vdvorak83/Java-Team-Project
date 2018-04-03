@@ -22,7 +22,7 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
+//    @Column(name = "user_id")
     @ManyToOne
     private User user;
 

@@ -22,11 +22,11 @@ public class MoneyHistoryEntry {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
+//    @Column(name = "user_id")
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @Column(name = "goal")
+//    @Column(name = "goal")
     @ManyToOne(cascade = CascadeType.ALL)
     private Goal goal;
 
