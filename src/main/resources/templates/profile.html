@@ -4,115 +4,140 @@
     <title>Log In</title>
     <div th:include="fragments/header :: head"></div>
 
-    <style>
-        .hidden.menu {
-            display: none;
-        }
+    <link href="/profile.css" rel="stylesheet" type="text/css"/>
 
-        .masthead.segment {
-            min-height: 700px;
-            padding: 1em 0em;
-        }
-        .masthead .logo.item img {
-            margin-right: 1em;
-        }
-        .masthead .ui.menu .ui.button {
-            margin-left: 0.5em;
-        }
-        .masthead h1.ui.header {
-            margin-top: 3em;
-            margin-bottom: 0em;
-            font-size: 4em;
-            font-weight: normal;
-        }
-        .masthead h2 {
-            font-size: 1.7em;
-            font-weight: normal;
-        }
-
-        .ui.vertical.stripe {
-            padding: 8em 0em;
-        }
-        .ui.vertical.stripe h3 {
-            font-size: 2em;
-        }
-        .ui.vertical.stripe .button + h3,
-        .ui.vertical.stripe p + h3 {
-            margin-top: 3em;
-        }
-        .ui.vertical.stripe .floated.image {
-            clear: both;
-        }
-        .ui.vertical.stripe p {
-            font-size: 1.33em;
-        }
-        .ui.vertical.stripe .horizontal.divider {
-            margin: 3em 0em;
-        }
-
-        .quote.stripe.segment {
-            padding: 0em;
-        }
-        .quote.stripe.segment .grid .column {
-            padding-top: 5em;
-            padding-bottom: 5em;
-        }
-
-        .footer.segment {
-            padding: 5em 0em;
-        }
-
-        .secondary.pointing.menu .toc.item {
-            display: none;
-        }
-
-        @media only screen and (max-width: 700px) {
-            .ui.fixed.menu {
-                display: none !important;
-            }
-            .secondary.pointing.menu .item,
-            .secondary.pointing.menu .menu {
-                display: none;
-            }
-            .secondary.pointing.menu .toc.item {
-                display: block;
-            }
-            .masthead.segment {
-                min-height: 350px;
-            }
-            .masthead h1.ui.header {
-                font-size: 2em;
-                margin-top: 1.5em;
-            }
-            .masthead h2 {
-                margin-top: 0.5em;
-                font-size: 1.5em;
-            }
-        }
-    </style>
 </head>
 
 <body>
 <div th:include="fragments/header :: navbar" th:class="testclass"></div>
-<!--<div class="ui internally celled grid">
-    <div class="ui card">
-        <div class="image">
-            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+
+<div>
+
+<div id="allCards">
+    <div class="ui card ai" id="cards">
+        <div class="ui slide masked reveal image"><img id = "picGoal" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+            <!--<img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/>-->
         </div>
-        <div class="content">
-            <a class="header" th:text="${login}"></a>
-            <div class="meta">
-                <span class="date">Joined in 2013</span>
-            </div>
-            <div class="description">
-                Kristy is an art director living in New York.
-            </div>
+        <div class="content"><a class="header">My last goal</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
         </div>
         <div class="extra content">
-            <a>
-                <i class="user icon"></i>
-                22 Friends
-            </a>
+            <div class="ui indicating progress active" data-percent="20">
+                <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui card ai" id="cards2">
+        <div class="ui slide masked reveal image"><img id = "picGoal2" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+        <div class="content"><a class="header">My last goal #2</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
+        </div>
+        <div class="extra content">
+            <div class="ui indicating progress active" data-percent="50">
+                <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui card ai" id="cards3">
+        <div class="ui slide masked reveal image">
+            <img id = "picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+        <div class="content"><a class="header">My last goal #3</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
+        </div>
+        <div class="extra content">
+            <div class="ui indicating progress active" data-percent="80">
+                <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="MainProfile">
+        <div class="column">
+            <div>
+                <div class="ui card segment">
+                    <div class="image">
+                        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                    </div>
+                    <div class="content">
+                        <a class="header" th:text="${login}"></a>
+                        <div class="meta">
+                            <span class="header" th:text="${regDate}"></span>
+                        </div>
+                        <div class="description">
+                            Kristy is an art director living in New York.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="user icon"></i>
+                            22 Friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="ui form" id="mainForm">
+    <div class="fields">
+        <div class="field">
+            <div id="l1">
+                <label>My new goal is</label>
+            </div>
+            <input type="text" placeholder="Goal"/>
+
+            <div id="description">
+                <div id="lb">
+                    <label>Description</label>
+                </div>
+                <textarea rows="5"></textarea>
+            </div>
+            <div id="Crypto">
+                <label id="priceQuestion">Would you like to add a price of your goal?</label>
+
+                <div class="ui form">
+                    <div class="inline  fields" id="inlineCheckbox">
+                        <div id="selectCr">
+                        <label>Select your cryptocurrency :</label>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="frequency" checked="checked"/>
+                                <label>No</label>
+                            </div>
+                        </div><div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="frequency"/>
+                            <label>Bitcoin</label>
+                        </div>
+                    </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="frequency"/>
+                                <label>Ripple</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="frequency"/>
+                                <label>Litecoin</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id = "createGoalButton">
+                    <a class="positive ui button" th:href="@{/user/createGoal}">Create Goal</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>-->
@@ -123,8 +148,10 @@
     </button>
 </div>
 
-<!--<div th:include="fragments/footer :: foot"></div>-->
 
+
+
+</div>
 </body>
 
 </html>
