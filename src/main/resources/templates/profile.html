@@ -4,154 +4,198 @@
     <title>Log In</title>
     <div th:include="fragments/header :: head"></div>
 
-    <link href="/profile.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
 
+    <script>
+        $('#file').change(function () {
+            $('#upload-file-form').submit();
+        });
+    </script>
 </head>
-
 <body>
-<div th:include="fragments/header :: navbar" th:class="testclass"></div>
+<div th:include="fragments/header :: navbar"></div>
+<!--
+<th:block th:if="${image.error == null}">
+    <div class="ui page active dimmer">
+        <div class="content" th:text="${image.error}">Hello</div>
+    </div>
+</th:block>-->
+
+<!--<th:block th:if="${image.error != null}">
+    <div class="ui page active dimmer">
+        <div class="content">Hello</div>
+    </div>
+</th:block>-->
 
 <div>
+    <div id="main-content">
+        <div class="ui card ai" id="cards">
+            <div class="ui slide masked reveal image"><img id="picGoal" class="visible content"
+                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
+            </div>
+            <div class="content"><a class="header">My last goal</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="20">
+                    <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
+                    <div class="label">Goal in Progress</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui card ai" id="cards2">
+            <div class="ui slide masked reveal image"><img id="picGoal2" class="visible content"
+                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
+                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+            <div class="content"><a class="header">My last goal #2</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="50">
+                    <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
+                    <div class="label">Goal in Progress</div>
+                </div>
+            </div>
+        </div>
 
-<div id="allCards">
-    <div class="ui card ai" id="cards">
-        <div class="ui slide masked reveal image"><img id = "picGoal" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
-            <!--<img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/>-->
-        </div>
-        <div class="content"><a class="header">My last goal</a>
-            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
-            <div class="description">Description of this goal</div>
-        </div>
-        <div class="extra content">
-            <div class="ui indicating progress active" data-percent="20">
-                <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
-                <div class="label">Goal in Progress</div>
+        <div class="ui card ai" id="cards3">
+            <div class="ui slide masked reveal image">
+                <img id="picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+            <div class="content"><a class="header">My last goal #3</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="80">
+                    <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
+                    <div class="label">Goal in Progress</div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="ui card ai" id="cards2">
-        <div class="ui slide masked reveal image"><img id = "picGoal2" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
-            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
-        <div class="content"><a class="header">My last goal #2</a>
-            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
-            <div class="description">Description of this goal</div>
-        </div>
-        <div class="extra content">
-            <div class="ui indicating progress active" data-percent="50">
-                <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
-                <div class="label">Goal in Progress</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="ui card ai" id="cards3">
-        <div class="ui slide masked reveal image">
-            <img id = "picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
-            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
-        <div class="content"><a class="header">My last goal #3</a>
-            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
-            <div class="description">Description of this goal</div>
-        </div>
-        <div class="extra content">
-            <div class="ui indicating progress active" data-percent="80">
-                <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
-                <div class="label">Goal in Progress</div>
-            </div>
-        </div>
-    </div>
-</div>
 
     <div id="MainProfile">
         <div class="column">
-            <div>
-                <div class="ui card segment">
-                    <div class="image">
-                        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+            <div class="ui special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div>
+                                        <form id="upload-file-form" enctype="multipart/form-data" method="post"
+                                              th:action="@{/upload}">
+                                            <label for="file" class="ui icon primary button">
+                                                <i class="file icon"></i>
+                                                Change Photo</label>
+                                            <input id="file" type="file" name="file" accept="image/*"
+                                                   style="display:none"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <th:block th:switch="${user.getImage()}">
+                            <th:block th:case="null">
+                                <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                            </th:block>
+                            <th:block>
+                                <img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>
+                            </th:block>
+                        </th:block>
                     </div>
                     <div class="content">
-                        <a class="header" th:text="${login}"></a>
+                        <a class="header" th:text="${user.getLogin()}"></a>
                         <div class="meta">
-                            <span class="header" th:text="${regDate}"></span>
+                            <span class="header" th:text="${user.getRegDate()}"></span>
                         </div>
                         <div class="description">
-                            Kristy is an art director living in New York.
+                            suck dick ples
                         </div>
                     </div>
                     <div class="extra content">
                         <a>
                             <i class="user icon"></i>
-                            22 Friends
+                            <th:block th:text="'22 Friends'">22 Friends</th:block>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<div class="ui form" id="mainForm">
-    <div class="fields">
-        <div class="field">
-            <div id="l1">
-                <label>My new goal is</label>
-            </div>
-            <input type="text" placeholder="Goal"/>
-
-            <div id="description">
-                <div id="lb">
-                    <label>Description</label>
+    <div class="ui form" id="mainForm">
+        <div class="fields">
+            <div class="field">
+                <div id="l1">
+                    <label>My new goal is</label>
                 </div>
-                <textarea rows="5"></textarea>
-            </div>
-            <div id="Crypto">
-                <label id="priceQuestion">Would you like to add a price of your goal?</label>
+                <input type="text" placeholder="Goal"/>
 
-                <div class="ui form">
-                    <div class="inline  fields" id="inlineCheckbox">
-                        <div id="selectCr">
-                        <label>Select your cryptocurrency :</label>
-                        </div>
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="frequency" checked="checked"/>
-                                <label>No</label>
+                <div id="description">
+                    <div id="lb">
+                        <label for="goal-description">Description</label>
+                    </div>
+                    <textarea rows="5" id="goal-description"></textarea>
+                </div>
+                <div id="Crypto">
+                    <label id="priceQuestion">Would you like to add a price of your goal?</label>
+
+                    <div class="ui form">
+                        <div class="inline  fields" id="inlineCheckbox">
+                            <div id="selectCr">
+                                <label>Select your cryptocurrency :</label>
                             </div>
-                        </div><div class="field">
-                        <div class="ui radio checkbox">
-                            <input type="radio" name="frequency"/>
-                            <label>Bitcoin</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency" checked="checked"/>
+                                    <label>No</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Bitcoin</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Ripple</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Litecoin</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="frequency"/>
-                                <label>Ripple</label>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="frequency"/>
-                                <label>Litecoin</label>
-                            </div>
-                        </div>
+                    <div id="createGoalButton">
+                        <a class="positive ui button" th:href="@{/user/createGoal}">Create Goal</a>
                     </div>
-                </div>
-                <div id = "createGoalButton">
-                    <a class="positive ui button" th:href="@{/user/createGoal}">Create Goal</a>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
 
-<div>
-    <button class="ui primary button">
-        Create a new goal
-    </button>
+    <div>
+        <button class="ui primary button">
+            Create a new goal
+        </button>
+    </div>
 </div>
 
-
-
-
-</div>
+<script>
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
+    $('#file').change(function () {
+        $('#upload-file-form').submit();
+    });
+</script>
 </body>
-
 </html>
