@@ -7,7 +7,7 @@ import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.security.state.UserState;
 import com.skyforce.goal.service.RegistrationService;
 import com.skyforce.goal.util.SmtpMailSender;
-import com.skyforce.goal.validation.EmailExistsException;
+import com.skyforce.goal.exception.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

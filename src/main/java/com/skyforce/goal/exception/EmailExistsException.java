@@ -1,4 +1,4 @@
-package com.skyforce.goal.validation;
+package com.skyforce.goal.exception;
 
 @SuppressWarnings("serial")
 public class EmailExistsException extends Throwable {

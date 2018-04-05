@@ -69,4 +69,7 @@ public class User {
     /*@OneToOne
     @JoinColumn(name = "id")
     private Wallet wallet;*/
+
+    @OneToOne
+    private Image image;
 }
