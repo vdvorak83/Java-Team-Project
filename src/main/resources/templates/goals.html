@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <div th:include="fragments/header :: head"></div>
+
+    <title>Document</title>
+
+    <style>
+        #main-content {
+            padding-top: 4.5%;
+            padding-left: 0.5%;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div th:include="fragments/header :: navbar"></div>
+
+<div id="main-content">
+    <div class="ui secondary pointing menu">
+        <a class="active item" th:href="@{/goals}">Recommended</a>
+        <a class="item" th:href="@{/goals(section=new)}">New</a>
+        <a class="item" th:href="@{/goals(section=test)}">###</a>
+    </div>
+    <div class="ui center aligned grid">
+        <th:block th:each="goal : ${goals}">
+            <div class="three wide column">
+                <div class="ui cards">
+                    <div class="ui card">
+                        <div class="image">
+                            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                        </div>
+                        <div class="content left aligned">
+                            <a class="header" th:text="${goal.getTitle()}">Kristy</a>
+                            <div class="meta">
+                            <span class="date" th:text="'Goal started: ' +
+                                  ${#dates.day(goal.getDateStart())} + ' ' +
+                                  ${#dates.monthName(goal.getDateStart())} + ' ' +
+                                  ${#dates.year(goal.getDateStart())}"></span>
+                            </div>
+                            <div class="description" th:text="${goal.getDescription()}">
+                                Kristy is an art director living in New York.
+                            </div>
+                        </div>
+                        <div class="extra left aligned content">
+                            <a>
+                                <i class="heart outline icon"></i>
+                                <th:block th:text="likes">22 Friends</th:block>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
