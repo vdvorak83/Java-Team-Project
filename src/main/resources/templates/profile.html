@@ -113,7 +113,6 @@
                             <span class="header" th:text="${user.getRegDate()}"></span>
                         </div>
                         <div class="description">
-                            suck dick ples
                         </div>
                     </div>
                     <div class="extra content">
@@ -126,19 +125,20 @@
             </div>
         </div>
     </div>
-    <div class="ui form" id="mainForm">
+    <form class="ui form" id="mainForm" method="post" name="GoalForm"   >
+    <!--<div class="ui form"   >-->
         <div class="fields">
             <div class="field">
                 <div id="l1">
                     <label>My new goal is</label>
                 </div>
-                <input type="text" placeholder="Goal"/>
+                <input type="text" name="goalName" placeholder="Goal"/>
 
-                <div id="description">
+                <div id="description" >
                     <div id="lb">
                         <label for="goal-description">Description</label>
                     </div>
-                    <textarea rows="5" id="goal-description"></textarea>
+                    <textarea rows="5" name="description" id="goal-description"></textarea>
                 </div>
                 <div id="Crypto">
                     <label id="priceQuestion">Would you like to add a price of your goal?</label>
@@ -173,20 +173,25 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="text" id="price" name="price" placeholder="Price"/>
+
                     </div>
                     <div id="createGoalButton">
-                        <a class="positive ui button" th:href="@{/user/createGoal}">Create Goal</a>
+                        <!--<button type="button" class="positive ui button" th:href="@{/goals}">Create Goal</button>-->
+                        <!--<a class="positive ui button" th:href="@{/goals}">Create Goal</a>-->
+                        <input type="submit" th:href="@{/goals}" class="ui blue fluid large submit button"/>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
-    <div>
-        <button class="ui primary button">
-            Create a new goal
-        </button>
-    </div>
+    <!--<div>-->
+        <!--<button class="ui primary button">-->
+            <!--Create a new goal-->
+        <!--</button>-->
+    <!--</div>-->
 </div>
 
 <script>
