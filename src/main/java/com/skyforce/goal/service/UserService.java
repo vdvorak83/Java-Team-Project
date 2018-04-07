@@ -1,5 +1,7 @@
 package com.skyforce.goal.service;
 
-public interface UserService {
+import com.skyforce.goal.model.User;
 
+public interface UserService {
+    User findUserByLogin(String login);
 }

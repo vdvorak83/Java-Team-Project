@@ -8,6 +8,7 @@ import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.GoalService;
 import com.skyforce.goal.service.ImageService;
 //import com.skyforce.goal.validator.GoalFormValidator;
+import com.skyforce.goal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class ProfileController {
     private GoalService goalService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     /*@Autowired
     private GoalFormValidator goalFormValidator;
@@ -41,6 +42,7 @@ public class ProfileController {
         model.addAttribute("login", authenticationService.getUserByAuthentication(authentication).getLogin());
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
         model.addAttribute("goalForm",new GoalDto());
+        model.addAttribute("goals", goalService.findGoalsByUser(authenticationService.getUserByAuthentication(authentication)));
 
         return "profile";
     }
@@ -48,19 +50,17 @@ public class ProfileController {
     @PostMapping("/user/profile")
     public String getGoalCreated(Authentication authentication, @ModelAttribute("goalForm") GoalDto goalDto, Model model){
         Goal goal = goalService.createGoal(goalDto, authentication);
-        model.addAttribute("goal",goal);
+        model.addAttribute("goal", goal);
 
         return "redirect:/goals";
     }
 
     @GetMapping("/user/{login}")
     public String getUserPage(Authentication authentication, Model model, @PathVariable("login") String login) {
-        if (userRepository.findUserByLogin(login).isPresent())
-            model.addAttribute("user", userRepository.findUserByLogin(login).get());
-        if (authenticationService.getUserByAuthentication(authentication) == userRepository.findUserByLogin(login).get())
+        if (authenticationService.getUserByAuthentication(authentication) == userService.findUserByLogin(login))
             return "profile";
-        /*else
-            throw new ResourceNotFoundException(1488L, "404");*/ // FIXME: 07.04.2018
+
+        model.addAttribute("user", userService.findUserByLogin(login));
 
         return "user-page";
     }
