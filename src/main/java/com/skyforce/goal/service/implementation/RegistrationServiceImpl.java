@@ -1,6 +1,7 @@
 package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.dto.UserDto;
+import com.skyforce.goal.model.Image;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
@@ -39,6 +40,10 @@ public class RegistrationServiceImpl implements RegistrationService {
                     userDto.getEmail());
         }
 
+        Image defaultImage = new Image();
+
+        defaultImage.setId(1L);
+
         User newUser = User.builder()
                 .login(userDto.getLogin())
                 .email(userDto.getEmail())
@@ -47,6 +52,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .role(UserRole.USER.getValue())
                 .state(UserState.NOT_ACTIVE.getValue())
                 .uuid(UUID.randomUUID().toString())
+                .image(defaultImage)
                 .build();
 
         userRepository.save(newUser);

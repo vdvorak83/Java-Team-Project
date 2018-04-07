@@ -1,0 +1,8 @@
+body {
+    overflow-x: hidden;
+    min-width: auto;
+}
+
+.column {
+    max-width: 450px;
+}
