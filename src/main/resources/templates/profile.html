@@ -111,7 +111,7 @@
                                 <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
                             </th:block>
                             <th:block>
-                                <img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>
+                                <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
                             </th:block>
                         </th:block>
                     </div>
