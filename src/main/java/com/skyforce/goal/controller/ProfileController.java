@@ -3,10 +3,11 @@ package com.skyforce.goal.controller;
 import com.skyforce.goal.dto.GoalDto;
 import com.skyforce.goal.model.Goal;
 import com.skyforce.goal.model.User;
+import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.GoalService;
 import com.skyforce.goal.service.ImageService;
-import com.skyforce.goal.validator.GoalFormValidator;
+//import com.skyforce.goal.validator.GoalFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,11 @@ public class ProfileController {
     private GoalService goalService;
 
     @Autowired
-    private GoalFormValidator goalFormValidator;
+    private UserRepository userRepository;
 
+    /*@Autowired
+    private GoalFormValidator goalFormValidator;
+*/
 //    @InitBinder("goalForm")
 //    public void initGoalFormValidator(WebDataBinder binder) {
 //        binder.addValidators(goalFormValidator);
@@ -42,13 +46,23 @@ public class ProfileController {
     }
 
     @PostMapping("/user/profile")
-    public String getGoalCreated(Authentication authentication, @ModelAttribute("goalForm") GoalDto goalDto, Model model,
-                                 BindingResult result, RedirectAttributes redirectAttributes){
+    public String getGoalCreated(Authentication authentication, @ModelAttribute("goalForm") GoalDto goalDto, Model model){
         Goal goal = goalService.createGoal(goalDto, authentication);
         model.addAttribute("goal",goal);
 
         return "redirect:/goals";
+    }
 
+    @GetMapping("/user/{login}")
+    public String getUserPage(Authentication authentication, Model model, @PathVariable("login") String login) {
+        if (userRepository.findUserByLogin(login).isPresent())
+            model.addAttribute("user", userRepository.findUserByLogin(login).get());
+        if (authenticationService.getUserByAuthentication(authentication) == userRepository.findUserByLogin(login).get())
+            return "profile";
+        /*else
+            throw new ResourceNotFoundException(1488L, "404");*/ // FIXME: 07.04.2018
+
+        return "user-page";
     }
 
 }

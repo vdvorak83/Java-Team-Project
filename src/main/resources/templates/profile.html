@@ -111,7 +111,7 @@
                                 <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
                             </th:block>
                             <th:block>
-                                <img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>
+                                <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
                             </th:block>
                         </th:block>
                     </div>
@@ -133,7 +133,7 @@
             </div>
         </div>
     </div>
-    <form class="ui form" id="mainForm" method="post" name="GoalForm"   >
+    <form class="ui form" id="mainForm" method="post" name="GoalForm" th:action="@{'/user/profile'}">
     <!--<div class="ui form"   >-->
         <div class="fields">
             <div class="field">
