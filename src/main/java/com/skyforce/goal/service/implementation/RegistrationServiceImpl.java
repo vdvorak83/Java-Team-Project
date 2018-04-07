@@ -1,6 +1,7 @@
 package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.dto.UserDto;
+import com.skyforce.goal.model.Image;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
@@ -39,6 +40,10 @@ public class RegistrationServiceImpl implements RegistrationService {
                     userDto.getEmail());
         }
 
+        Image defaultImage = new Image();
+
+        defaultImage.setId(8L);
+
         User newUser = User.builder()
                 .login(userDto.getLogin())
                 .email(userDto.getEmail())
@@ -47,15 +52,22 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .role(UserRole.USER.getValue())
                 .state(UserState.NOT_ACTIVE.getValue())
                 .uuid(UUID.randomUUID().toString())
+                .image(defaultImage)
                 .build();
 
         userRepository.save(newUser);
 
+        System.out.println(newUser.getEmail());
+
+        System.out.println("SENDING EMAIL");
         executorService.submit(() -> {
             try {
+                System.out.println("TRY BLOCK");
                 mailSender.send(newUser.getEmail(), "Please confirm your registration",
                         "http://localhost:8080/confirm/" + newUser.getUuid());
+                System.out.println("MAIL SENT");
             } catch (MessagingException e) {
+                System.out.println("EXCEPTION");
                 e.printStackTrace();
             }
         });
