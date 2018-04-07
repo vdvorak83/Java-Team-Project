@@ -14,6 +14,6 @@ import java.util.Date;
 public class GoalDto {
     private String goalName;
     private String description;
-    //private int price;
+    private int price;
     private Date dateEnd;
 }

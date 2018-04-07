@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Component
 public class GoalFormValidator implements Validator {
+
     @Autowired
     private GoalRepository goalRepository;
 
@@ -30,6 +31,6 @@ public class GoalFormValidator implements Validator {
                 "Goal name can't be empty!");
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"description","empty.description",
-                "Description can't be empty!");
+                "description  can't be empty!");
     }
 }
