@@ -36,8 +36,8 @@ public class ProfileController {
     public String getProfilePage(Authentication authentication, Model model) {
         model.addAttribute("login", authenticationService.getUserByAuthentication(authentication).getLogin());
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
-        GoalDto newGoal = new GoalDto();
-        model.addAttribute("goalForm",newGoal);
+        model.addAttribute("goalForm",new GoalDto());
+
         return "profile";
     }
 

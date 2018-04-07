@@ -11,8 +11,16 @@
             $('#upload-file-form').submit();
         });
     </script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <!--<script src="static/css/js/fla)tpickr.js"></script>-->
 </head>
 <body>
+
 <div th:include="fragments/header :: navbar"></div>
 <!--
 <th:block th:if="${image.error == null}">
@@ -173,34 +181,38 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="text" id="price" name="price" placeholder="Price"/>
-
+                            <div id="priceD">
+                                <input type="text" id="price" name="price" placeholder="Price"/>
+                            </div>
+                            <div id="endingDate">
+                                <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
+                            </div>
                     </div>
                     <div id="createGoalButton">
-                        <!--<button type="button" class="positive ui button" th:href="@{/goals}">Create Goal</button>-->
-                        <!--<a class="positive ui button" th:href="@{/goals}">Create Goal</a>-->
-                        <input type="submit" th:href="@{/goals}" class="ui blue fluid large submit button"/>
-
+                        <input type="submit" value="Create Goal" th:href="@{/goals}" class="positive ui button  submit button"/>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-
-    <!--<div>-->
-        <!--<button class="ui primary button">-->
-            <!--Create a new goal-->
-        <!--</button>-->
-    <!--</div>-->
 </div>
 
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
-    $('.special.cards .image').dimmer({
-        on: 'hover'
-    });
-    $('#file').change(function () {
-        $('#upload-file-form').submit();
-    });
+$("#basicDate").flatpickr({
+enableTime: true,
+dateFormat: "F, d Y"
+});
+</script>
+
+<script>
+$('.special.cards .image').dimmer({
+on: 'hover'
+});
+$('#file').change(function () {
+$('#upload-file-form').submit();
+});
 </script>
 </body>
 </html>

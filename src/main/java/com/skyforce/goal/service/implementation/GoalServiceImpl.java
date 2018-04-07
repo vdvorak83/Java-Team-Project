@@ -48,6 +48,7 @@ public class GoalServiceImpl implements GoalService{
                 .name(goalDto.getGoalName())
                 .description(goalDto.getDescription())
                 .dateStart(date)
+                .dateEnd(goalDto.getDateEnd())
                 .price(BigDecimal.valueOf(goalDto.getPrice()))
                 .build();
         //TODO OTHER VALUES
