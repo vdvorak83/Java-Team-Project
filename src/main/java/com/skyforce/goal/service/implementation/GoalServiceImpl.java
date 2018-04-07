@@ -2,6 +2,7 @@ package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.dto.GoalDto;
 import com.skyforce.goal.model.Goal;
+import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.GoalRepository;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.state.GoalState;
@@ -24,10 +25,6 @@ public class GoalServiceImpl implements GoalService{
 
     @Autowired
     private GoalRepository goalRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
 
     @Autowired
     private AuthenticationService authenticationService;
@@ -57,5 +54,10 @@ public class GoalServiceImpl implements GoalService{
         goalRepository.save(newGoal);
 
         return newGoal;
+    }
+
+    @Override
+    public List<Goal> findGoalsByUser(User user) {
+        return goalRepository.findGoalsByUser(user);
     }
 }

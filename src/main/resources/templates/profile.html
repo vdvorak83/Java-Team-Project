@@ -134,7 +134,7 @@
         </div>
     </div>
     <form class="ui form" id="mainForm" method="post" name="GoalForm" th:action="@{'/user/profile'}">
-    <!--<div class="ui form"   >-->
+        <!--<div class="ui form"   >-->
         <div class="fields">
             <div class="field">
                 <div id="l1">
@@ -142,7 +142,7 @@
                 </div>
                 <input type="text" name="goalName" placeholder="Goal"/>
 
-                <div id="description" >
+                <div id="description">
                     <div id="lb">
                         <label for="goal-description">Description</label>
                     </div>
@@ -181,15 +181,16 @@
                                 </div>
                             </div>
                         </div>
-                            <div id="priceD">
-                                <input type="text" id="price" name="price" placeholder="Price"/>
-                            </div>
-                            <div id="endingDate">
-                                <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
-                            </div>
+                        <div id="priceD">
+                            <input type="text" id="price" name="price" placeholder="Price"/>
+                        </div>
+                        <div id="endingDate">
+                            <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
+                        </div>
                     </div>
                     <div id="createGoalButton">
-                        <input type="submit" value="Create Goal" th:href="@{/goals}" class="positive ui button  submit button"/>
+                        <input type="submit" value="Create Goal" th:href="@{/goals}"
+                               class="positive ui button  submit button"/>
                     </div>
                 </div>
             </div>
@@ -197,22 +198,30 @@
     </form>
 </div>
 
+<div>
+    <th:block th:each="goal : ${goals}">
+        <ul>
+            <li th:text="${goal.getTitle()}"></li>
+        </ul>
+    </th:block>
+</div>
+
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
-$("#basicDate").flatpickr({
-enableTime: true,
-dateFormat: "F, d Y"
-});
+    $("#basicDate").flatpickr({
+        enableTime: true,
+        dateFormat: "F, d Y"
+    });
 </script>
 
 <script>
-$('.special.cards .image').dimmer({
-on: 'hover'
-});
-$('#file').change(function () {
-$('#upload-file-form').submit();
-});
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
+    $('#file').change(function () {
+        $('#upload-file-form').submit();
+    });
 </script>
 </body>
 </html>
