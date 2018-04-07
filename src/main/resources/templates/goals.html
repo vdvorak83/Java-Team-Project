@@ -36,12 +36,12 @@
                             <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
                         </div>
                         <div class="content left aligned">
-                            <a class="header" th:text="${goal.getTitle()}">Kristy</a>
+                            <a class="header" th:text="${goal.getName()}">Kristy</a>
                             <div class="meta">
-                            <span class="date" th:text="'Goal started: ' +
-                                  ${#dates.day(goal.getDateStart())} + ' ' +
-                                  ${#dates.monthName(goal.getDateStart())} + ' ' +
-                                  ${#dates.year(goal.getDateStart())}"></span>
+                            <span class="date" th:text="'Goal started: '
+                            + ${goal.getDateStart()}">
+
+                            </span>
                             </div>
                             <div class="description" th:text="${goal.getDescription()}">
                                 Kristy is an art director living in New York.

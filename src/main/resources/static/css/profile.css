@@ -146,3 +146,13 @@
       padding-top: 2px;
       padding-right: 3px;
   }
+  #price{
+      width: 20%;
+      /*height: 2%;*/
+  }
+  #priceD{
+      padding-top: 2%;
+  }
+  #endingDate{
+      padding-top: 2%;
+  }

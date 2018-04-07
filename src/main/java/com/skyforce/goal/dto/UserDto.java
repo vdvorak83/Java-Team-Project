@@ -36,4 +36,5 @@ public class UserDto {
     @NotEmpty
     @ValidEmail
     private String email;
+
 }
