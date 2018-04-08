@@ -36,7 +36,6 @@ public class GoalServiceImpl implements GoalService{
 
     @Override
     public Goal createGoal(GoalDto goalDto, Authentication authentication) {
-        System.out.println("Hello goal is creating");
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         Goal newGoal = Goal.builder()
@@ -46,11 +45,9 @@ public class GoalServiceImpl implements GoalService{
                 .description(goalDto.getDescription())
                 .dateStart(date)
                 .dateEnd(goalDto.getDateEnd())
-                //.price(BigDecimal.valueOf(goalDto.getPrice()))
+                .price(BigDecimal.valueOf(goalDto.getPrice()))
                 .build();
-        //TODO OTHER VALUES
 
-        System.out.println("THE DATE IS " + date);
         goalRepository.save(newGoal);
 
         return newGoal;

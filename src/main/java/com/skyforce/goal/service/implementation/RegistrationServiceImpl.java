@@ -42,7 +42,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         Image defaultImage = new Image();
 
-        defaultImage.setId(8L);
+        defaultImage.setId(1L);
 
         User newUser = User.builder()
                 .login(userDto.getLogin())
@@ -57,17 +57,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         userRepository.save(newUser);
 
-        System.out.println(newUser.getEmail());
-
-        System.out.println("SENDING EMAIL");
         executorService.submit(() -> {
             try {
-                System.out.println("TRY BLOCK");
                 mailSender.send(newUser.getEmail(), "Please confirm your registration",
                         "http://localhost:8080/confirm/" + newUser.getUuid());
-                System.out.println("MAIL SENT");
             } catch (MessagingException e) {
-                System.out.println("EXCEPTION");
                 e.printStackTrace();
             }
         });

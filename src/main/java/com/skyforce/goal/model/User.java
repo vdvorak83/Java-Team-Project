@@ -3,10 +3,10 @@ package com.skyforce.goal.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -66,11 +66,9 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date regDate;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Goal> goals;
-
-    @OneToOne
-    private Wallet wallet;
+    /*@OneToOne
+    @JoinColumn(name = "id")
+    private Wallet wallet;*/
 
     @OneToOne
     private Image image;

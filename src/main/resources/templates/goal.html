@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My goal</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <link href="/css/goal.css" rel="stylesheet" type="text/css"/>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
+</head>
+<body>
+<!--<div class="ui borderless main menu">-->
+<!--<div class="ui text container">-->
+<!--<div th:include="fragments/header :: navbar"></div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div th:include="fragments/header :: navbar"></div>
+
+<div class="ui stackable four column grid" id="mainSegment">
+
+    <div class="column">
+        <div class="ui segment">
+            <div id="MainProfile">
+                <div class="column">
+                    <div class="ui special cards">
+                        <div class="card">
+                            <div class="blurring dimmable image">
+                                <div class="ui inverted dimmer">
+                                    <div class="content">
+                                        <div class="center">
+                                            <div>
+                                                <form id="upload-file-form" enctype="multipart/form-data" method="post"
+                                                      th:action="@{/upload}">
+                                                    <label for="file" class="ui icon primary button">
+                                                        <i class="file icon"></i>
+                                                        Change Photo</label>
+                                                    <input id="file" type="file" name="file" accept="image/*"
+                                                           style="display:none"/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <th:block th:switch="${user.getImage()}">
+                                    <th:block th:case="null">
+                                        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                                    </th:block>
+                                    <th:block>
+                                        <img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                            <div class="content">
+                                <a class="header" th:text="${user.getLogin()}"></a>
+                                <div class="meta">
+                                    <span class="header" th:text="${user.getRegDate()}"></span>
+                                </div>
+                                <div class="description">
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i class="user icon"></i>
+                                    <th:block th:text="'22 Friends'">22 Friends</th:block>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui raised very padded text grid container blue segment">
+            <h3>Read 100 books</h3>
+        </div>
+
+        <div class="ui raised very padded text grid container black segment">
+            <div class="description" id="description">
+                Everything you read fills your head with new bits of information,
+                and you never know when it might come in handy. The more knowledge you have,
+                the better-equipped you are to tackle any challenge you’ll ever face.
+                Additionally, here’s a bit of food for thought: should you ever find yourself
+                in dire circumstances, remember that although you might lose everything else—your job,
+                your possessions, your money, even your health—knowledge can never be taken from you.
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div th:include="fragments/footer :: foot"></div>-->
+
+</body>
+
+</html>
