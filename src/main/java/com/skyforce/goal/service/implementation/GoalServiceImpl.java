@@ -60,4 +60,9 @@ public class GoalServiceImpl implements GoalService{
     public List<Goal> findGoalsByUser(User user) {
         return goalRepository.findGoalsByUser(user);
     }
+
+    @Override
+    public List<Goal> findAllByOrderByDateStartDesc() {
+        return goalRepository.findAllByOrderByDateStartDesc();
+    }
 }

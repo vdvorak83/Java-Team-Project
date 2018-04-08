@@ -24,8 +24,8 @@
 <div id="main-content">
     <div class="ui secondary pointing menu">
         <a class="active item" th:href="@{/goals}">Recommended</a>
-        <a class="item" th:href="@{/goals(section=new)}">New</a>
-        <a class="item" th:href="@{/goals(section=test)}">###</a>
+        <a class="item" th:href="@{/goals(sort=new)}">New</a>
+        <a class="item" th:href="@{/goals(sort=test)}">###</a>
     </div>
     <div class="ui center aligned grid">
         <th:block th:each="goal : ${goals}">
