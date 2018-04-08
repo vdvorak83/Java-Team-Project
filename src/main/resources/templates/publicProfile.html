@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <div th:include="fragments/header :: head"></div>
+
+    <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:include="fragments/header :: navbar"></div>
+<div id="main-content">
+    <div class="ui card ai" id="cards">
+        <div class="ui slide masked reveal image"><img id="picGoal" class="visible content"
+                                                       src="https://pngicon.ru//data/media/2/kubok.png"/>
+        </div>
+        <div class="content"><a class="header">Goal #1</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
+        </div>
+        <div class="extra content">
+            <div class="ui indicating progress active" data-percent="20">
+                <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui card ai" id="cards2">
+        <div class="ui slide masked reveal image"><img id="picGoal2" class="visible content"
+                                                       src="https://pngicon.ru//data/media/2/kubok.png"/>
+            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+        <div class="content"><a class="header">Goal #2</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
+        </div>
+        <div class="extra content">
+            <div class="ui indicating progress active" data-percent="50">
+                <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui card ai" id="cards3">
+        <div class="ui slide masked reveal image">
+            <img id="picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+            <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+        <div class="content"><a class="header">Goal #3</a>
+            <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+            <div class="description">Description of this goal</div>
+        </div>
+        <div class="extra content">
+            <div class="ui indicating progress active" data-percent="80">
+                <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
+                <div class="label">Goal in Progress</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="MainProfile">
+    <div class="column">
+        <div class="ui special cards">
+            <div class="card">
+                <div class="blurring dimmable image">
+                    <div class="ui inverted dimmer">
+                        <div class="content">
+                            <div class="center">
+
+                            </div>
+                        </div>
+                    </div>
+                    <th:block th:switch="${user.getImage()}">
+                        <th:block th:case="null">
+                            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                        </th:block>
+                        <th:block>
+                            <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
+                        </th:block>
+                    </th:block>
+                </div>
+                <div class="content">
+                    <a class="header" th:text="${user.getLogin()}"></a>
+                    <div class="meta">
+                        <span class="header" th:text="${user.getRegDate()}"></span>
+                    </div>
+                    <div class="description">
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="user icon"></i>
+                        <th:block th:text="'22 Friends'">22 Friends</th:block>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

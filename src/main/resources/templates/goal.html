@@ -21,76 +21,71 @@
 <!--</div>-->
 <!--</div>-->
 
+<div class="ui borderless main menu">
 
 <div th:include="fragments/header :: navbar"></div>
+</div>
+<div class="ui middle aligned center aligned grid">
 
-<div class="ui stackable four column grid" id="mainSegment">
-
-    <div class="column">
-        <div class="ui segment">
-            <div id="MainProfile">
-                <div class="column">
-                    <div class="ui special cards">
-                        <div class="card">
-                            <div class="blurring dimmable image">
-                                <div class="ui inverted dimmer">
-                                    <div class="content">
-                                        <div class="center">
-                                            <div>
-                                                <form id="upload-file-form" enctype="multipart/form-data" method="post"
-                                                      th:action="@{/upload}">
-                                                    <label for="file" class="ui icon primary button">
-                                                        <i class="file icon"></i>
-                                                        Change Photo</label>
-                                                    <input id="file" type="file" name="file" accept="image/*"
-                                                           style="display:none"/>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <th:block th:switch="${user.getImage()}">
-                                    <th:block th:case="null">
-                                        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
-                                    </th:block>
-                                    <th:block>
-                                        <img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>
-                                    </th:block>
-                                </th:block>
-                            </div>
-                            <div class="content">
-                                <a class="header" th:text="${user.getLogin()}"></a>
-                                <div class="meta">
-                                    <span class="header" th:text="${user.getRegDate()}"></span>
-                                </div>
-                                <div class="description">
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <a>
-                                    <i class="user icon"></i>
-                                    <th:block th:text="'22 Friends'">22 Friends</th:block>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--<div class="column">-->
+        <!--<div class="ui segment">-->
+            <!--&lt;!&ndash;<div id="MainProfile">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="column">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="ui special cards">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="card">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="blurring dimmable image">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="ui inverted dimmer">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="content">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="center">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<form id="upload-file-form" enctype="multipart/form-data" method="post"&ndash;&gt;-->
+                                                      <!--&lt;!&ndash;th:action="@{/upload}">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<label for="file" class="ui icon primary button">&ndash;&gt;-->
+                                                        <!--&lt;!&ndash;<i class="file icon"></i>&ndash;&gt;-->
+                                                        <!--&lt;!&ndash;Change Photo</label>&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;<input id="file" type="file" name="file" accept="image/*"&ndash;&gt;-->
+                                                           <!--&lt;!&ndash;style="display:none"/>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<th:block th:switch="${user.getImage()}">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<th:block th:case="null">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<th:block>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<img th:src="@{~/storage/} + ${user.getImage().getFileName()}"/>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="content">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a class="header" th:text="${user.getLogin()}"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="meta">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="header" th:text="${user.getRegDate()}"></span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="description">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="extra content">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<i class="user icon"></i>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<th:block th:text="'22 Friends'">22 Friends</th:block>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="column">
         <div class="ui raised very padded text grid container blue segment">
-            <h3>Read 100 books</h3>
+            <h3 th:text="${goal.getName()}"></h3>
         </div>
 
         <div class="ui raised very padded text grid container black segment">
-            <div class="description" id="description">
-                Everything you read fills your head with new bits of information,
-                and you never know when it might come in handy. The more knowledge you have,
-                the better-equipped you are to tackle any challenge you’ll ever face.
-                Additionally, here’s a bit of food for thought: should you ever find yourself
-                in dire circumstances, remember that although you might lose everything else—your job,
-                your possessions, your money, even your health—knowledge can never be taken from you.
+            <div class="description" th:text="${goal.getDescription()}" id="description">
             </div>
         </div>
     </div>

@@ -58,11 +58,11 @@ public class ProfileController {
     @GetMapping("/user/{login}")
     public String getUserPage(Authentication authentication, Model model, @PathVariable("login") String login) {
         if (authenticationService.getUserByAuthentication(authentication) == userService.findUserByLogin(login))
-            return "profile";
+            return "redirect:/user/profile";
 
         model.addAttribute("user", userService.findUserByLogin(login));
 
-        return "user-page";
+        return "publicProfile";
     }
 
 }

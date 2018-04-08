@@ -8,9 +8,15 @@
 
     <div th:include="fragments/header :: head"></div>
 
-    <title>Goals</title>
-    <link href="/css/goals.css" rel="stylesheet" type="text/css"/>
+    <title>Document</title>
 
+    <style>
+        #main-content {
+            padding-top: 4.5%;
+            padding-left: 0.5%;
+            float: left;
+        }
+    </style>
 </head>
 <body>
 <div th:include="fragments/header :: navbar"></div>
@@ -18,8 +24,8 @@
 <div id="main-content">
     <div class="ui secondary pointing menu">
         <a class="active item" th:href="@{/goals}">Recommended</a>
-        <a class="item" th:href="@{/goals(sort=new)}">New</a>
-        <a class="item" th:href="@{/goals(sort=test)}">###</a>
+        <a class="item" th:href="@{/goals(section=new)}">New</a>
+        <a class="item" th:href="@{/goals(section=test)}">###</a>
     </div>
     <div class="ui center aligned grid">
         <th:block th:each="goal : ${goals}">
@@ -30,7 +36,7 @@
                             <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
                         </div>
                         <div class="content left aligned">
-                            <a class="header" th:text="${goal.getName()}">Kristy</a>
+                            <a class="header" th:text="${goal.getName()}" th:href="@{'/goal/' + ${goal.getId()}}"></a>
                             <div class="meta">
                             <span class="date" th:text="'Goal started: '
                             + ${goal.getDateStart()}">
@@ -38,6 +44,10 @@
                             </div>
                             <div class="description" th:text="${goal.getDescription()}">
                             </div>
+                        </div>
+                        <div class="ui bottom attached button">
+                            <i class="add icon"></i>
+                            Subscribe to Goal
                         </div>
                         <div class="extra left aligned content">
                             <a>
