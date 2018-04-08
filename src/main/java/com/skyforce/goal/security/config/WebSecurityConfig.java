@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/*").permitAll()
                 .antMatchers("/js/*").permitAll()
                 .antMatchers("/assets/*").permitAll()
-                .antMatchers("/static/*").permitAll()
+                .antMatchers("/templates/static/*").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+
         jdbcTokenRepository.setDataSource(dataSource);
 
         return jdbcTokenRepository;

@@ -4,164 +4,224 @@
     <title>Log In</title>
     <div th:include="fragments/header :: head"></div>
 
-    <style>
-        .hidden.menu {
-            display: none;
-        }
+    <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
 
-        .masthead.segment {
-            min-height: 700px;
-            padding: 1em 0em;
-        }
-        .masthead .logo.item img {
-            margin-right: 1em;
-        }
-        .masthead .ui.menu .ui.button {
-            margin-left: 0.5em;
-        }
-        .masthead h1.ui.header {
-            margin-top: 3em;
-            margin-bottom: 0em;
-            font-size: 4em;
-            font-weight: normal;
-        }
-        .masthead h2 {
-            font-size: 1.7em;
-            font-weight: normal;
-        }
+    <script>
+        $('#file').change(function () {
+            $('#upload-file-form').submit();
+        });
+    </script>
 
-        .ui.vertical.stripe {
-            padding: 8em 0em;
-        }
-        .ui.vertical.stripe h3 {
-            font-size: 2em;
-        }
-        .ui.vertical.stripe .button + h3,
-        .ui.vertical.stripe p + h3 {
-            margin-top: 3em;
-        }
-        .ui.vertical.stripe .floated.image {
-            clear: both;
-        }
-        .ui.vertical.stripe p {
-            font-size: 1.33em;
-        }
-        .ui.vertical.stripe .horizontal.divider {
-            margin: 3em 0em;
-        }
+    <!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
 
-        .quote.stripe.segment {
-            padding: 0em;
-        }
-        .quote.stripe.segment .grid .column {
-            padding-top: 5em;
-            padding-bottom: 5em;
-        }
-
-        .footer.segment {
-            padding: 5em 0em;
-        }
-
-        .secondary.pointing.menu .toc.item {
-            display: none;
-        }
-
-        @media only screen and (max-width: 700px) {
-            .ui.fixed.menu {
-                display: none !important;
-            }
-            .secondary.pointing.menu .item,
-            .secondary.pointing.menu .menu {
-                display: none;
-            }
-            .secondary.pointing.menu .toc.item {
-                display: block;
-            }
-            .masthead.segment {
-                min-height: 350px;
-            }
-            .masthead h1.ui.header {
-                font-size: 2em;
-                margin-top: 1.5em;
-            }
-            .masthead h2 {
-                margin-top: 0.5em;
-                font-size: 1.5em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <!--<script src="static/css/js/fla)tpickr.js"></script>-->
 </head>
-
 <body>
-<div th:include="fragments/header :: navbar" th:class="testclass"></div>
-<!--<div class="ui internally celled grid">
-    <div class="ui card">
-        <div class="image">
-            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
-        </div>
-        <div class="content">
-            <a class="header" th:text="${login}"></a>
-            <div class="meta">
-                <span class="date">Joined in 2013</span>
-            </div>
-            <div class="description">
-                Kristy is an art director living in New York.
-            </div>
-        </div>
-        <div class="extra content">
-            <a>
-                <i class="user icon"></i>
-                22 Friends
-            </a>
-        </div>
-    </div>
-</div>-->
 
-<div class="ui three column doubling grid">
-    <div class="column">
-        <div class="ui internally celled grid">
-            <div class="ui card segment">
-                <div class="image">
-                    <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
-                </div>
-                <div class="content">
-                    <a class="header" th:text="${login}"></a>
-                    <div class="meta">
-                        <span class="date">Joined in 2013</span>
-                    </div>
-                    <div class="description">
-                        Kristy is an art director living in New York.
-                    </div>
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="user icon"></i>
-                        22 Friends
-                    </a>
+<div th:include="fragments/header :: navbar"></div>
+<!--
+<th:block th:if="${image.error == null}">
+    <div class="ui page active dimmer">
+        <div class="content" th:text="${image.error}">Hello</div>
+    </div>
+</th:block>-->
+
+<!--<th:block th:if="${image.error != null}">
+    <div class="ui page active dimmer">
+        <div class="content">Hello</div>
+    </div>
+</th:block>-->
+
+<div>
+    <div id="main-content">
+        <div class="ui card ai" id="cards">
+            <div class="ui slide masked reveal image"><img id="picGoal" class="visible content"
+                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
+            </div>
+            <div class="content"><a class="header">My last goal</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="20">
+                    <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
+                    <div class="label">Goal in Progress</div>
                 </div>
             </div>
         </div>
-        <!--<div class="ui segment">Content</div>-->
+        <div class="ui card ai" id="cards2">
+            <div class="ui slide masked reveal image"><img id="picGoal2" class="visible content"
+                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
+                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+            <div class="content"><a class="header">My last goal #2</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="50">
+                    <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
+                    <div class="label">Goal in Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui card ai" id="cards3">
+            <div class="ui slide masked reveal image">
+                <img id="picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
+                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
+            <div class="content"><a class="header">My last goal #3</a>
+                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
+                <div class="description">Description of this goal</div>
+            </div>
+            <div class="extra content">
+                <div class="ui indicating progress active" data-percent="80">
+                    <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
+                    <div class="label">Goal in Progress</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="column">
-        <div class="ui segment">Content</div>
+
+    <div id="MainProfile">
+        <div class="column">
+            <div class="ui special cards">
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div>
+                                        <form id="upload-file-form" enctype="multipart/form-data" method="post"
+                                              th:action="@{/upload}">
+                                            <label for="file" class="ui icon primary button">
+                                                <i class="file icon"></i>
+                                                Change Photo</label>
+                                            <input id="file" type="file" name="file" accept="image/*"
+                                                   style="display:none"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <th:block th:switch="${user.getImage()}">
+                            <th:block th:case="null">
+                                <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                            </th:block>
+                            <th:block>
+                                <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <div class="content">
+                        <a class="header" th:text="${user.getLogin()}"></a>
+                        <div class="meta">
+                            <span class="header" th:text="${user.getRegDate()}"></span>
+                        </div>
+                        <div class="description">
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="user icon"></i>
+                            <th:block th:text="'22 Friends'">22 Friends</th:block>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="column">
-        <div class="ui segment">Content</div>
-    </div>
-    <div class="column">
-        <div class="ui segment">Content</div>
-    </div>
-    <div class="column">
-        <div class="ui segment">Content</div>
-    </div>
-    <div class="column">
-        <div class="ui segment">Content</div>
-    </div>
+    <form class="ui form" id="mainForm" method="post" name="GoalForm" th:action="@{'/user/profile'}">
+        <!--<div class="ui form"   >-->
+        <div class="fields">
+            <div class="field">
+                <div id="l1">
+                    <label>My new goal is</label>
+                </div>
+                <input type="text" name="goalName" placeholder="Goal"/>
+
+                <div id="description">
+                    <div id="lb">
+                        <label for="goal-description">Description</label>
+                    </div>
+                    <textarea rows="5" name="description" id="goal-description"></textarea>
+                </div>
+                <div id="Crypto">
+                    <label id="priceQuestion">Would you like to add a price of your goal?</label>
+
+                    <div class="ui form">
+                        <div class="inline  fields" id="inlineCheckbox">
+                            <div id="selectCr">
+                                <label>Select your cryptocurrency :</label>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency" checked="checked"/>
+                                    <label>No</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Bitcoin</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Ripple</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Litecoin</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="priceD">
+                            <input type="text" id="price" name="price" placeholder="Price"/>
+                        </div>
+                        <div id="endingDate">
+                            <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
+                        </div>
+                    </div>
+                    <div id="createGoalButton">
+                        <input type="submit" value="Create Goal" th:href="@{/goals}"
+                               class="positive ui button  submit button"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
-<!--<div th:include="fragments/footer :: foot"></div>-->
+<div>
+    <th:block th:each="goal : ${goals}">
+        <ul>
+            <li th:text="${goal.getTitle()}"></li>
+        </ul>
+    </th:block>
+</div>
 
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+<script>
+    $("#basicDate").flatpickr({
+        enableTime: true,
+        dateFormat: "F, d Y"
+    });
+</script>
+
+<script>
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
+    $('#file').change(function () {
+        $('#upload-file-form').submit();
+    });
+</script>
 </body>
-
 </html>

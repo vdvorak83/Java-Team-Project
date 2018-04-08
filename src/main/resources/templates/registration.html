@@ -6,21 +6,14 @@
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <link href="/css/registration.css" rel="stylesheet" type="text/css"/>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
 
-    <style type="text/css">
-        body > .grid {
-            height: 100%;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-    </style>
 
     <script>
         $(document)
@@ -71,11 +64,11 @@
                                 identifier: 'password-repeat',
                                 rules: [
                                     {
-                                        type: 'match[password]',
+                                        type: 'empty',
                                         prompt: 'Passwords doesn\'t match'
                                     },
                                     {
-                                        type: 'empty',
+                                        type: 'match[password]',
                                         prompt: 'Passwords doesn\'t match'
                                     }
                                 ]
@@ -92,36 +85,56 @@
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         <h2 class="ui blue image header">CREATE ACCOUNT</h2>
-        <form class="ui large form" th:method="post">
+        <form class="ui large form" th:object="${user}" th:method="post">
             <div class="ui stacked segment">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="login" placeholder="login"/>
+                        <input type="text" name="login" th:field="*{login}" placeholder="login"/>
+                        <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="email" name="email" placeholder="e-mail"/>
+                        <input type="email" name="email" th:field="*{email}" placeholder="e-mail"/>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="password"/>
+                        <input type="password" name="password" th:field="*{password}" placeholder="password"/>
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password-repeat" placeholder="repeat password"/>
+                        <input type="password" name="password-repeat" th:field="*{matchingPassword}"
+                               placeholder="repeat password"/>
+                        <div th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></div>
                     </div>
                 </div>
                 <input type="submit" th:value="REGISTER" class="ui fluid large blue submit button"/>
             </div>
-            <div class="ui error message"></div>
+            <!--<div>
+                <ul>
+                    <li th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Please enter your login</li>
+                    <li th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></li>
+                    <li th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></li>
+                    <li th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></li>
+                </ul>
+            </div>-->
         </form>
+
+        <div>
+            <div class="ui message error" id="error" th:errors="${user}">
+                <ul>
+                    <li th:if="${#fields.hasErrors('login')}" th:errors="*{user.login}">Please enter your login</li>
+                </ul>
+            </div>
+        </div>
 
         <div class="ui message">
             Already have account? <a th:href="@{/login}"><strong>Sign In</strong></a>

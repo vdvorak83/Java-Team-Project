@@ -26,31 +26,15 @@
 
 <body>
 <div th:fragment="navbar">
-    <div class="ui fixed menu">
+    <div class="ui top fixed menu">
         <div class="ui container">
             <a href="#" class="header item">
                 <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png"/>
                 Project Name
             </a>
-            <a href="#" class="item">Home</a>
-            <div class="ui simple dropdown item">
-                Dropdown <i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class="item" href="#">Link Item</a>
-                    <a class="item" href="#">Link Item</a>
-                    <div class="divider"></div>
-                    <div class="header">Header Item</div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        Sub Menu
-                        <div class="menu">
-                            <a class="item" href="#">Link Item</a>
-                            <a class="item" href="#">Link Item</a>
-                        </div>
-                    </div>
-                    <a class="item" href="#">Link Item</a>
-                </div>
-            </div>
+            <a th:href="@{/user/profile}" class="item">Home</a>
+            <a th:href="@{/goals}" class="item">Goals</a>
+            <a th:href="@{/people}" class="item">People</a>
         </div>
         <div class="right menu">
             <div class="item">
@@ -59,8 +43,7 @@
                     <i class="search link icon"></i>
                 </div>
             </div>
-            <a class="ui item" th:href="@{/user/profile}" th:text="${login}">Profile</a>
-            <a class="ui item" th:href="@{/logout}">Log out</a>
+            <a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>
         </div>
     </div>
 </div>

@@ -23,8 +23,14 @@ public class Goal {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "title")
+    private String title;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;
@@ -34,6 +40,10 @@ public class Goal {
 
     @Enumerated(EnumType.ORDINAL)
     private GoalState state;
+
+    @Column(name = "date_start")
+    @Temporal(TemporalType.DATE)
+    private Date dateStart;
 
     @Column(name = "date_end")
     @Temporal(TemporalType.DATE)
