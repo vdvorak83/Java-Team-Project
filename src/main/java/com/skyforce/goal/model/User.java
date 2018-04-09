@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -79,11 +78,13 @@ public class User {
     @OneToOne
     private Image image;
 
-    /*@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_followers", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "follower_id")})
-    private Set<UserFollower> users;
+    @ManyToMany
+    @JoinTable(name = "users_followings", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id"))
+    private List<User> users;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_followers", joinColumns = {@JoinColumn(name = "follower_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<UserFollower> followers;*/
+    @ManyToMany
+    @JoinTable(name = "users_followings", joinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<User> follows;
 }
