@@ -107,5 +107,9 @@
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:2.2.4" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:1.3.2" level="project" />
+    <orderEntry type="library" name="sidebar" level="application" />
+    <orderEntry type="library" name="visibility" level="application" />
+    <orderEntry type="library" name="flatpickr" level="application" />
+    <orderEntry type="library" name="dimmer" level="application" />
   </component>
 </module>
