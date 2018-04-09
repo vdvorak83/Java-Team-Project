@@ -6,7 +6,6 @@ import com.skyforce.goal.security.state.UserState;
 import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.FollowingService;
 import com.skyforce.goal.service.GoalService;
-//import com.skyforce.goal.validator.GoalFormValidator;
 import com.skyforce.goal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -57,8 +56,8 @@ public class ProfileController {
     public String getUserPage(Authentication authentication, Model model, @PathVariable("login") String login) {
         if (authenticationService.getUserByAuthentication(authentication) == userService.findUserByLogin(login))
             return "redirect:/user/profile";
-
-        model.addAttribute("user", userService.findUserByLogin(login));
+        model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
+        model.addAttribute("thisUser", userService.findUserByLogin(login));
 
         return "public-profile";
     }

@@ -99,14 +99,17 @@
 
 #l1{
     display: block;
-    font-size: 20px;
-    margin-top: 2%;
+    font-size: x-large;
+    /*margin-top: 1%;*/
     margin-bottom: 2%;
+    padding-bottom: 1.5%;
 }
 #lb{
     display: block;
     margin-top: 1%;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 1.5%;
+    font-size: medium;
 }
 #mainForm{
     width: 33%;
@@ -130,6 +133,11 @@
     padding-top: 5%;
 }
 #description{
+    width: 170%;
+    padding-top: 2%;
+}
+#checkPointDescription{
+    width: 170%;
     padding-top: 2%;
 }
 #picGoal{
@@ -143,6 +151,7 @@
       width: auto;
   }
   #selectCr{
+      font-size: medium;
       padding-top: 2px;
       padding-right: 3px;
   }
@@ -156,3 +165,34 @@
   #endingDate{
       padding-top: 2%;
   }
+  #planLabel{
+      font-size: medium;
+      margin-top: 1%;
+      margin-bottom: 2%;
+      padding-bottom: 1.5%;
+  }
+  #chLabel{
+      font-size: medium;
+      margin-top: 1%;
+      margin-bottom: 2%;
+      padding-bottom: 1.5%;
+  }
+#chLabel {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 1.5%;
+}
+#planLabel{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 1.5%;
+}
+.label{
+    font-size: medium;
+}
+#wouldLabel{
+    font-size: medium;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 1.5%;
+}

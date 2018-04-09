@@ -18,9 +18,10 @@
                 background-color: #FFFFFF;
             }
 
-            .ui.menu .item img.logo {
+            .ui.menu  img.logo {
                 margin-right: 1.5em;
             }
+
         </style>
     </th:block>
 </head>
@@ -44,6 +45,14 @@
                     <i class="search link icon"></i>
                 </div>
             </div>
+            <a class="ui item" th:href="@{/user/profile}">
+                <i class="user icon"></i>
+                <div th:text="${user.getLogin()}"></div>
+            </a>
+            <a class="ui item">
+                <i class="sign out alternate icon"></i>
+                Logout
+            </a>
             <a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>
             <a class="ui item" href="/logout">Log out</a>
         </div>
