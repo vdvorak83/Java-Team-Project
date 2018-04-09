@@ -146,71 +146,71 @@
                     <div id="lb">
                         <label for="goal-description">Description</label>
                     </div>
-                    <textarea rows="5" name="description" id="goal-description"></textarea>
+                    <textarea rows="7" name="description" id="goal-description"></textarea>
                 </div>
-                <div id="Crypto">
-                    <label id="priceQuestion">Would you like to add a price of your goal?</label>
+                <div id="planLabel">
+                    <label>My plan:</label>
+                </div>
+                <input type="text" name="checkPointName" placeholder="Checkpoint name"/>
+                <div id="chLabel">
+                    <label for="checkPointDescription">Description for the checkpoint</label>
+                </div>
+                <textarea rows="4" id="checkPointDescription"></textarea>
+                <button class=" ui blue button" onclick="checkpointFunction()">New Checkpoint</button>
 
-                    <div class="ui form">
-                        <div class="inline  fields" id="inlineCheckbox">
-                            <div id="selectCr">
-                                <label>Select your cryptocurrency :</label>
-                            </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="frequency" checked="checked"/>
-                                    <label>No</label>
+
+                <div id="Crypto">
+                        <div id="wouldLabel">
+                        <label id="priceQuestion">Would you like to add a price of your goal?</label>
+                        </div>
+                        <div class="ui form">
+                            <div class="inline  fields" id="inlineCheckbox">
+                                <div id="selectCr">
+                                    <label>Select your cryptocurrency :</label>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="frequency" checked="checked"/>
+                                        <label>No</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="frequency"/>
+                                        <label>Bitcoin</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="frequency"/>
-                                    <label>Bitcoin</label>
-                                </div>
+                            <div id="priceD">
+                                <input type="text" id="price" name="price" placeholder="Price"/>
                             </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="frequency"/>
-                                    <label>Ripple</label>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="frequency"/>
-                                    <label>Litecoin</label>
-                                </div>
+                            <div id="endingDate">
+                                <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
                             </div>
                         </div>
-                        <div id="priceD">
-                            <input type="text" id="price" name="price" placeholder="Price"/>
-                        </div>
-                        <div id="endingDate">
-                            <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
+                        <div id="createGoalButton">
+                            <input type="submit" value="Create Goal" th:href="@{/goals}"
+                                   class="positive ui button  submit button"/>
                         </div>
                     </div>
-                    <div id="createGoalButton">
-                        <input type="submit" value="Create Goal" th:href="@{/goals}"
-                               class="positive ui button  submit button"/>
-                    </div>
-                </div>
             </div>
         </div>
     </form>
 </div>
 
-<div>
-    <th:block th:each="goal : ${goals}">
-        <ul>
-            <li th:text="${goal.getTitle()}"></li>
-        </ul>
-    </th:block>
-</div>
+<!--<div>-->
+    <!--<th:block th:each="goal : ${goals}">-->
+        <!--<ul>-->
+            <!--<li th:text="${goal.getTitle()}"></li>-->
+        <!--</ul>-->
+    <!--</th:block>-->
+<!--</div>-->
 
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
     $("#basicDate").flatpickr({
-        enableTime: true,
+        enableTime: false,
         dateFormat: "F, d Y"
     });
 </script>

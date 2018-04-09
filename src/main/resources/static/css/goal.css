@@ -1,0 +1,22 @@
+#main{
+    padding-top: 5%;
+    /*width: 50%;*/
+    /*margin: auto;*/
+
+}
+#segment{
+    width: 35%;
+}
+
+#date
+{
+    font-style:italic;
+    font-size: medium;
+}
+#description{
+    font-size: large;
+}
+#price{
+    font-style: normal;
+    font-size: medium;
+}

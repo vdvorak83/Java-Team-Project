@@ -16,7 +16,12 @@
             padding-left: 0.5%;
             float: left;
         }
+        #description{
+            overflow: auto;
+        }
+
     </style>
+
 </head>
 <body>
 <div th:include="fragments/header :: navbar"></div>
@@ -42,17 +47,19 @@
                             + ${goal.getDateStart()}">
                             </span>
                             </div>
-                            <div class="description" th:text="${goal.getDescription()}">
+                            <!--<div class="description">-->
+                            <!--<span th:text="${goal.getDescription()}">-->
+                            <!--</span>-->
                             </div>
-                        </div>
-                        <div class="ui bottom attached button">
-                            <i class="add icon"></i>
-                            Subscribe to Goal
-                        </div>
-                        <div class="extra left aligned content">
-                            <a>
-                                <i class="heart outline icon"></i>
+                        <div class="extra content">
+                            <span class="left floated">
+                                <i class="like icon"></i>
                                 <th:block th:text="likes">22 Friends</th:block>
+                                </span>
+                            <a>
+                            <span class="right floated">
+                                <i class="bell outline icon"></i>
+                                </span>
                             </a>
                         </div>
                     </div>

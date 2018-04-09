@@ -32,9 +32,10 @@ public class GoalsController {
     }
 
     @GetMapping("goal/{id}")
-    public String getGoalPage(Model model, @PathVariable("id") Long id) {
+    public String getGoalPage(Authentication authentication,Model model, @PathVariable("id") Long id) {
         Goal goal = goalService.findGoalById(id);
         model.addAttribute("goal", goal);
+        model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
 //        model.addAttribute("user", userService.findUserByLogin(login));
         return "goal";
     }

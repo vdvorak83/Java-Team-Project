@@ -39,7 +39,7 @@ public class ProfileController {
 
     @GetMapping("/user/profile")
     public String getProfilePage(Authentication authentication, Model model) {
-        model.addAttribute("login", authenticationService.getUserByAuthentication(authentication).getLogin());
+//        model.addAttribute("login", authenticationService.getUserByAuthentication(authentication).getLogin());
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
         model.addAttribute("goalForm",new GoalDto());
         model.addAttribute("goals", goalService.findGoalsByUser(authenticationService.getUserByAuthentication(authentication)));
@@ -59,8 +59,8 @@ public class ProfileController {
     public String getUserPage(Authentication authentication, Model model, @PathVariable("login") String login) {
         if (authenticationService.getUserByAuthentication(authentication) == userService.findUserByLogin(login))
             return "redirect:/user/profile";
-
-        model.addAttribute("user", userService.findUserByLogin(login));
+        model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
+        model.addAttribute("thisUser", userService.findUserByLogin(login));
 
         return "publicProfile";
     }
