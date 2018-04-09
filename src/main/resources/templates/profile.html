@@ -151,12 +151,17 @@
                 <div id="planLabel">
                     <label>My plan:</label>
                 </div>
+
+                <div class="input_fields_wrap">
+                <div id="checkPointName">
                 <input type="text" name="checkPointName" placeholder="Checkpoint name"/>
+                </div>
                 <div id="chLabel">
                     <label for="checkPointDescription">Description for the checkpoint</label>
                 </div>
                 <textarea rows="4" id="checkPointDescription"></textarea>
-                <button class=" ui blue button" onclick="checkpointFunction()">New Checkpoint</button>
+                </div>
+                <button class="ui blue button" id="add_field_button">New Checkpoint</button>
 
 
                 <div id="Crypto">
@@ -214,6 +219,24 @@
         dateFormat: "F, d Y"
     });
 </script>
+<script>
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $("#add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+                $(wrapper).append('<div id="checkPointName" ><input type="text" name="checkPointName" placeholder="Checkpoint name"/></div>\n' +
+                    '                <div id="chLabel">\n' +
+                    '                    <label for="checkPointDescription">Description for the checkpoint</label>\n' +
+                    '                </div>\n' +
+                    '                <textarea rows="4" id="checkPointDescription"></textarea>'); //add input box
+        });
+    });
+</script>
+
 
 <script>
     $('.special.cards .image').dimmer({
