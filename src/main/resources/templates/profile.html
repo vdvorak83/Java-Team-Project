@@ -2,39 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My profile</title>
-    <div th:include="fragments/header :: head"></div>
+    <th:block th:include="fragments/header :: head"></th:block>
 
     <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
 
-    <script>
-        $('#file').change(function () {
-            $('#upload-file-form').submit();
-        });
-    </script>
-
-    <!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/card.css"/>
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <!--<script src="static/css/js/fla)tpickr.js"></script>-->
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>
 </head>
+
 <body>
-
 <div th:include="fragments/header :: navbar"></div>
-<!--
-<th:block th:if="${image.error == null}">
-    <div class="ui page active dimmer">
-        <div class="content" th:text="${image.error}">Hello</div>
-    </div>
-</th:block>-->
-
-<!--<th:block th:if="${image.error != null}">
-    <div class="ui page active dimmer">
-        <div class="content">Hello</div>
-    </div>
-</th:block>-->
-
 <div>
     <div id="main-content">
         <div class="ui card ai" id="cards">
@@ -90,19 +73,17 @@
             <div class="ui special cards">
                 <div class="card">
                     <div class="blurring dimmable image">
-                        <div class="ui inverted dimmer">
+                        <div class="ui dimmer">
                             <div class="content">
                                 <div class="center">
-                                    <div>
-                                        <form id="upload-file-form" enctype="multipart/form-data" method="post"
-                                              th:action="@{/upload}">
-                                            <label for="file" class="ui icon primary button">
-                                                <i class="file icon"></i>
-                                                Change Photo</label>
-                                            <input id="file" type="file" name="file" accept="image/*"
-                                                   style="display:none"/>
-                                        </form>
-                                    </div>
+                                    <form id="upload-file-form" enctype="multipart/form-data" method="post"
+                                          th:action="@{/upload}">
+                                        <label for="file" class="ui icon primary button">
+                                            <i class="file icon"></i>
+                                            Change Photo</label>
+                                        <input id="file" type="file" name="file" accept="image/*"
+                                               style="display:none"/>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -206,15 +187,12 @@
     <!--</th:block>-->
 <!--</div>-->
 
-<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
     $("#basicDate").flatpickr({
         enableTime: false,
         dateFormat: "F, d Y"
     });
 </script>
-
 <script>
     $('.special.cards .image').dimmer({
         on: 'hover'

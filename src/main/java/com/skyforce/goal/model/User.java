@@ -1,12 +1,13 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.security.role.UserRole;
+import com.skyforce.goal.security.state.UserState;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -50,11 +51,13 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "role_id")
-    private Integer role;
+    private UserRole role;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "state_id")
-    private Integer state;
+    private UserState state;
 
     @Column(name = "uuid", unique = true)
     private String uuid;
@@ -74,4 +77,14 @@ public class User {
 
     @OneToOne
     private Image image;
+
+    @ManyToMany
+    @JoinTable(name = "users_followings", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id"))
+    private List<User> users;
+
+    @ManyToMany
+    @JoinTable(name = "users_followings", joinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<User> follows;
 }
