@@ -40,17 +40,15 @@ public class RegistrationServiceImpl implements RegistrationService {
                     userDto.getEmail());
         }
 
-        Image defaultImage = new Image();
-
-        defaultImage.setId(8L);
+        Image defaultImage = Image.builder().id(8L).build();
 
         User newUser = User.builder()
                 .login(userDto.getLogin())
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .regDate(new Date())
-                .role(UserRole.USER.getValue())
-                .state(UserState.NOT_ACTIVE.getValue())
+                .role(UserRole.USER)
+                .state(UserState.NOT_ACTIVE)
                 .uuid(UUID.randomUUID().toString())
                 .image(defaultImage)
                 .build();
@@ -59,15 +57,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         System.out.println(newUser.getEmail());
 
-        System.out.println("SENDING EMAIL");
         executorService.submit(() -> {
             try {
-                System.out.println("TRY BLOCK");
                 mailSender.send(newUser.getEmail(), "Please confirm your registration",
                         "http://localhost:8080/confirm/" + newUser.getUuid());
-                System.out.println("MAIL SENT");
             } catch (MessagingException e) {
-                System.out.println("EXCEPTION");
                 e.printStackTrace();
             }
         });
@@ -82,7 +76,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            user.setState(UserState.ACTIVE.getValue());
+            user.setState(UserState.ACTIVE);
             user.setUuid(null);
 
             userRepository.save(user);

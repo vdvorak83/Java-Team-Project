@@ -68,7 +68,7 @@ public class RegistrationController {
     public String confirm(@PathVariable("uuid") String uuid) {
         registrationService.confirm(uuid);
 
-        return "login";
+        return "redirect:/login";
     }
 
     /*@RequestMapping(value = "/user/registration", method = RequestMethod.POST)

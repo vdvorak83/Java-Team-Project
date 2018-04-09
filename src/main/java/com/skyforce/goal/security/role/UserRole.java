@@ -1,6 +1,7 @@
 package com.skyforce.goal.security.role;
 
 public enum UserRole {
+    EMPTY(0),
     ADMIN(1),
     MODERATOR(2),
     USER(3);
