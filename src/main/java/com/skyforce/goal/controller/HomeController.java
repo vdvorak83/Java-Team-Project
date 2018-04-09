@@ -18,9 +18,9 @@ public class HomeController {
         if (authentication != null) {
             User user = authenticationService.getUserByAuthentication(authentication);
 
-            if (user.getRole().equals(UserRole.ADMIN.getValue())) {
+            if (user.getRole().equals(UserRole.ADMIN)) {
                 return "redirect:/admin";
-            } else if (user.getRole().equals(UserRole.USER.getValue())){
+            } else if (user.getRole().equals(UserRole.USER)){
                 return "redirect:/user/profile";
             }
         }

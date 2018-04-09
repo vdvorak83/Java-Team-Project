@@ -1,6 +1,7 @@
 package com.skyforce.goal.security.state;
 
 public enum UserState {
+    EMPTY(0),
     ACTIVE(1),
     BANNED(2),
     NOT_ACTIVE(3);
