@@ -62,7 +62,9 @@ public class GoalServiceImpl implements GoalService{
     }
 
     @Override
-    public List<Goal> findAllByOrderByDateStartDesc() {
-        return goalRepository.findAllByOrderByDateStartDesc();
+    public Goal findGoalById(Long id) {
+        return goalRepository.findGoalById(id);
     }
+
+
 }

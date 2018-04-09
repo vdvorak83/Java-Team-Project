@@ -30,17 +30,13 @@
                         <div class="content left aligned">
                             <a class="header" th:text="${user.getLogin()}" th:href="@{'/user/' + ${user.getLogin()}}">Kristy</a>
                             <div class="meta">
+                                Registration date
+                                <a th:text="${user.getRegDate()}"></a>
                             </div>
                         </div>
-                        <div class="extra left aligned content">
-                            <a>
-                                <i class="heart outline user"></i>
-                                <th:block th:text="'42' + ' friends'">22 Friends</th:block>
-                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
         </th:block>
     </div>
 </div>
