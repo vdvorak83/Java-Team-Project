@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,4 +51,7 @@ public class Goal {
     @Column(name = "date_end")
     @Temporal(TemporalType.DATE)
     private Date dateEnd;
+
+    @OneToMany(mappedBy = "goal", fetch = FetchType.EAGER)
+    private List<Checkpoint> checkpoints;
 }

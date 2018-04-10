@@ -1,5 +1,6 @@
 package com.skyforce.goal.dto;
 
+import com.skyforce.goal.model.Checkpoint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,6 @@ public class GoalDto {
     private String description;
     private int price;
     private Date dateEnd;
+    private String checkpointName;
+    private String checkpointDescription;
 }

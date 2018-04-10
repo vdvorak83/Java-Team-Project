@@ -2,22 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My profile</title>
-    <th:block th:include="fragments/header :: head"></th:block>
+    <div th:include="fragments/header :: head"></div>
 
     <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
 
+    <script>
+        $('#file').change(function () {
+            $('#upload-file-form').submit();
+        });
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/card.css"/>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>
 </head>
-
 <body>
+
 <div th:include="fragments/header :: navbar"></div>
+
 <div>
     <div id="main-content">
         <div class="ui card ai" id="cards">
@@ -25,7 +30,6 @@
                                                            src="https://pngicon.ru//data/media/2/kubok.png"/>
             </div>
             <div class="content"><a class="header">My last goal</a>
-                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
                 <div class="description">Description of this goal</div>
             </div>
             <div class="extra content">
@@ -73,17 +77,19 @@
             <div class="ui special cards">
                 <div class="card">
                     <div class="blurring dimmable image">
-                        <div class="ui dimmer">
+                        <div class="ui inverted dimmer">
                             <div class="content">
                                 <div class="center">
-                                    <form id="upload-file-form" enctype="multipart/form-data" method="post"
-                                          th:action="@{/upload}">
-                                        <label for="file" class="ui icon primary button">
-                                            <i class="file icon"></i>
-                                            Change Photo</label>
-                                        <input id="file" type="file" name="file" accept="image/*"
-                                               style="display:none"/>
-                                    </form>
+                                    <div>
+                                        <form id="upload-file-form" enctype="multipart/form-data" method="post"
+                                              th:action="@{/upload}">
+                                            <label for="file" class="ui icon primary button">
+                                                <i class="file icon"></i>
+                                                Change Photo</label>
+                                            <input id="file" type="file" name="file" accept="image/*"
+                                                   style="display:none"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,60 +138,58 @@
                 <div id="planLabel">
                     <label>My plan:</label>
                 </div>
-                <input type="text" name="checkPointName" placeholder="Checkpoint name"/>
-                <div id="chLabel">
-                    <label for="checkPointDescription">Description for the checkpoint</label>
-                </div>
-                <textarea rows="4" id="checkPointDescription"></textarea>
-                <button class=" ui blue button" onclick="checkpointFunction()">New Checkpoint</button>
 
+                <div class="input_fields_wrap">
+                    <div id="checkPointName">
+                        <input type="text" name="checkpointName" placeholder="Checkpoint name"/>
+                    </div>
+                    <div id="chLabel">
+                        <label for="checkpointDescription">Description for the checkpoint</label>
+                    </div>
+                    <textarea rows="4" name="checkpointDescription" id="checkPointDescription"></textarea>
+                </div>
+                <div id="checkpointButton">
+                    <button class="ui blue button" id="add_field_button">New Checkpoint</button>
+                </div>
 
                 <div id="Crypto">
-                        <div id="wouldLabel">
+                    <div id="wouldLabel">
                         <label id="priceQuestion">Would you like to add a price of your goal?</label>
-                        </div>
-                        <div class="ui form">
-                            <div class="inline  fields" id="inlineCheckbox">
-                                <div id="selectCr">
-                                    <label>Select your cryptocurrency :</label>
-                                </div>
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="frequency" checked="checked"/>
-                                        <label>No</label>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="frequency"/>
-                                        <label>Bitcoin</label>
-                                    </div>
+                    </div>
+                    <div class="ui form">
+                        <div class="inline  fields" id="inlineCheckbox">
+                            <div id="selectCr">
+                                <label>Select your cryptocurrency :</label>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency" checked="checked"/>
+                                    <label>No</label>
                                 </div>
                             </div>
-                            <div id="priceD">
-                                <input type="text" id="price" name="price" placeholder="Price"/>
-                            </div>
-                            <div id="endingDate">
-                                <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="frequency"/>
+                                    <label>Bitcoin</label>
+                                </div>
                             </div>
                         </div>
-                        <div id="createGoalButton">
-                            <input type="submit" value="Create Goal" th:href="@{/goals}"
-                                   class="positive ui button  submit button"/>
+                        <div id="priceD">
+                            <input type="text" id="price" name="price" placeholder="Price"/>
+                        </div>
+                        <div id="endingDate">
+                            <input type="text" id="basicDate" name="dateEnd" placeholder="I'll achieve my goal..."/>
                         </div>
                     </div>
+                    <div id="createGoalButton">
+                        <input type="submit" value="Create Goal" th:href="@{/goals}"
+                               class="positive ui button  submit button"/>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
 </div>
-
-<!--<div>-->
-    <!--<th:block th:each="goal : ${goals}">-->
-        <!--<ul>-->
-            <!--<li th:text="${goal.getTitle()}"></li>-->
-        <!--</ul>-->
-    <!--</th:block>-->
-<!--</div>-->
 
 <script>
     $("#basicDate").flatpickr({
@@ -193,6 +197,22 @@
         dateFormat: "F, d Y"
     });
 </script>
+<script>
+    $(document).ready(function () {
+        var wrapper = $(".input_fields_wrap");
+        var add_button = $("#add_field_button");
+
+        $(add_button).click(function (e) {
+            e.preventDefault();
+            $(wrapper).append('<div id="checkPointName" ><input type="text" name="checkPointName" placeholder="Checkpoint name"/></div>\n' +
+                '                <div id="chLabel">\n' +
+                '                    <label for="checkPointDescription">Description for the checkpoint</label>\n' +
+                '                </div>\n' +
+                '                <textarea rows="4" id="checkPointDescription"></textarea>');
+        });
+    });
+</script>
+
 <script>
     $('.special.cards .image').dimmer({
         on: 'hover'
