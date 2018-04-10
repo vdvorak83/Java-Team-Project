@@ -134,7 +134,7 @@
 }
 #description{
     width: 170%;
-    padding-top: 2%;
+    padding-top: 1%;
 }
 #checkPointDescription{
     width: 170%;
@@ -198,4 +198,7 @@
 }
 #checkPointName{
 margin-top: 3%
+}
+#checkpointButton{
+    padding-top: 3%;
 }

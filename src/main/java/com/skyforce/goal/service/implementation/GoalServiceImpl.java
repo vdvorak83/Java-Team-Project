@@ -1,6 +1,7 @@
 package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.dto.GoalDto;
+import com.skyforce.goal.model.Checkpoint;
 import com.skyforce.goal.model.Goal;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.GoalRepository;
@@ -17,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,11 +50,20 @@ public class GoalServiceImpl implements GoalService{
                 .dateEnd(goalDto.getDateEnd())
                 .price(BigDecimal.valueOf(goalDto.getPrice()))
                 .build();
-        //TODO OTHER VALUES
 
-        System.out.println("THE DATE IS " + date);
+        Checkpoint checkpoint = null;
+        while(goalDto.getCheckpointName()!=null){
+            checkpoint.setName(goalDto.getCheckpointName());
+            checkpoint.setDescription(goalDto.getCheckpointDescription());
+             List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
+             checkpoints.add(checkpoint);
+            newGoal.setCheckpoints(checkpoints);
+        }
+
         goalRepository.save(newGoal);
 
+        System.out.println("THIS IS FROM DTO " + goalDto.getCheckpointName());
+        System.out.println("THIS NAME IS FROM CHECKPOINT " + checkpoint.getName());
         return newGoal;
     }
 
