@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:fragment="head">
+    <th:block th:fragment="head">
         <meta charset="UTF-8"/>
 
         <link rel="stylesheet" type="text/css"
@@ -11,6 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>
 
         <style type="text/css">
             body {
@@ -22,7 +23,7 @@
             }
 
         </style>
-    </div>
+    </th:block>
 </head>
 
 <body>
@@ -52,6 +53,8 @@
                 <i class="sign out alternate icon"></i>
                 Logout
             </a>
+            <a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>
+            <a class="ui item" href="/logout">Log out</a>
         </div>
     </div>
 </div>
