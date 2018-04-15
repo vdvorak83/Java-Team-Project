@@ -37,6 +37,7 @@
             <a th:href="@{/user/profile}" class="item">Home</a>
             <a th:href="@{/goals}" class="item">Goals</a>
             <a th:href="@{/people}" class="item">People</a>
+            <!--<a th:href="@{/user/subscriptions}" class="item">Following</a>-->
         </div>
         <div class="right menu">
             <div class="item">
@@ -53,7 +54,7 @@
                 <i class="sign out alternate icon"></i>
                 Logout
             </a>
-            <a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>
+            <!--<a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>-->
             <a class="ui item" href="/logout">Log out</a>
         </div>
     </div>
