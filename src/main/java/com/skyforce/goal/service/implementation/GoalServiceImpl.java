@@ -51,14 +51,18 @@ public class GoalServiceImpl implements GoalService{
                 .price(BigDecimal.valueOf(goalDto.getPrice()))
                 .build();
 
-        Checkpoint checkpoint = null;
-        while(goalDto.getCheckpointName()!=null){
-            checkpoint.setName(goalDto.getCheckpointName());
-            checkpoint.setDescription(goalDto.getCheckpointDescription());
+//        Checkpoint checkpoint = null;
+//        while(goalDto.getCheckpointName()!=null){
+            Checkpoint checkpoint = Checkpoint.builder()
+                    .name(goalDto.getCheckpointName())
+                    .description(goalDto.getDescription())
+                    .build();
+//            checkpoint.setName(goalDto.getCheckpointName());
+//            checkpoint.setDescription(goalDto.getCheckpointDescription());
              List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
              checkpoints.add(checkpoint);
             newGoal.setCheckpoints(checkpoints);
-        }
+
 
         goalRepository.save(newGoal);
 

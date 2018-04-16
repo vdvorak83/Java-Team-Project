@@ -42,7 +42,6 @@ public class ImageUploadController {
     @GetMapping("/storage/{file-name:.+}")
     @ResponseBody
     public ResponseEntity<InputStreamResource> getUploadedImage(@PathVariable("file-name") String fileName) throws IOException {
-        System.out.println("testing");
 
         Path path = imageService.findImageByFileName(fileName).getFilePath();
 

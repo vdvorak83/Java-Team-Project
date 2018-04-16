@@ -118,6 +118,12 @@
                     </div>
                 </div>
             </div>
+            <div class="ui vertical buttons" id="verticalBut">
+                <button class="ui button"> <a th:href="@{/user/following}">Following</a></button>
+                <button class="ui button"><a th:href="@{/user/followers}">Followers</a></button>
+                <button class="ui button"><a th:href="@{/user/myGoals}">My goals</a></button>
+            </div>
+            <!--<button th:href="@{/user/subscriptions}">Following</button>-->
         </div>
     </div>
     <form class="ui form" id="mainForm" method="post" name="GoalForm" th:action="@{'/user/profile'}">
