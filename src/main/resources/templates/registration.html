@@ -99,7 +99,7 @@
     <div class="column">
         <h2 class="ui blue image header">CREATE ACCOUNT</h2>
         <form class="ui large form" th:object="${user}" th:method="post">
-            <div class="ui stacked segment">
+            <div class="ui fluid segment">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
@@ -141,6 +141,11 @@
             </div>-->
         </form>
 
+        <div class="ui bottom attached warning message">
+            <!--Already signed up? <a href="#">Login here</a> instead.-->
+            Already have account? <a th:href="@{/login}"><strong>Sign In</strong></a>
+        </div>
+
         <div>
             <div class="ui message error" id="error" th:errors="${user}">
                 <ul>
@@ -149,9 +154,9 @@
             </div>
         </div>
 
-        <div class="ui message">
+        <!--<div class="ui message">
             Already have account? <a th:href="@{/login}"><strong>Sign In</strong></a>
-        </div>
+        </div>-->
     </div>
 </div>
 </body>

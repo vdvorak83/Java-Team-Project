@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -53,6 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .rememberMe()
+                .alwaysRemember(true)
+                .rememberMeCookieName("remember-me")
                 .tokenRepository(persistentTokenRepository())
                 .and()
                 .logout()
@@ -76,10 +79,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
-        final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
 
-        jdbcTokenRepository.setDataSource(dataSource);
+        tokenRepository.setDataSource(dataSource);
 
-        return jdbcTokenRepository;
+        return tokenRepository;
     }
 }
