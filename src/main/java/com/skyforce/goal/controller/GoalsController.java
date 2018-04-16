@@ -39,4 +39,12 @@ public class GoalsController {
 //        model.addAttribute("user", userService.findUserByLogin(login));
         return "goal";
     }
+    @GetMapping("/user/myGoals")
+    public String getMyGoals(Authentication authentication,Model model){
+        User user = authenticationService.getUserByAuthentication(authentication);
+        model.addAttribute("user",user);
+        model.addAttribute("myGoals",goalService.findGoalsByUser(user));
+
+        return "my-goals";
+    }
 }
