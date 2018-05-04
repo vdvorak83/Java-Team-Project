@@ -22,9 +22,10 @@
                         <div class="image">
                             <th:block th:switch="${user.getImage()}">
                                 <th:block th:case="null">
-                                    <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                                    <!--<img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>-->
+                                    <img src="/img/Kristy.png"/>
                                 </th:block>
-                                <th:block>
+                                <th:block th:case="*">
                                     <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
                                 </th:block>
                             </th:block>
