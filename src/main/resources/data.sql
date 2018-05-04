@@ -217,13 +217,13 @@ create table if not exists users_followings
 )
 ;
 
--- CREATE TABLE persistent_logins (
--- 	username varchar(64) not null,
--- 	series varchar(64) not null,
--- 	token varchar(64) not null,
--- 	last_used timestamp not null,
--- 	PRIMARY KEY (series)
--- );
+create table if not exists persistent_logins (
+	username varchar(64) not null,
+	series varchar(64) not null,
+	token varchar(64) not null,
+	last_used timestamp not null,
+	PRIMARY KEY (series)
+);
 
 INSERT INTO user_roles (id, name)
   SELECT 0, 'Empty'

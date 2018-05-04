@@ -57,11 +57,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .alwaysRemember(true)
                 .rememberMeCookieName("remember-me")
+                .tokenValiditySeconds(1209600)
                 .tokenRepository(persistentTokenRepository())
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .deleteCookies("remember-me")
+                .logoutSuccessUrl("/")
                 .permitAll();
 
         security.csrf().disable();
