@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
-@ToString
+@ToString(exclude = "goals")
 
 @Entity
 @Table(name = "users")
@@ -72,7 +72,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Goal> goals;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "wallet")
     private Wallet wallet;
 
     @OneToOne

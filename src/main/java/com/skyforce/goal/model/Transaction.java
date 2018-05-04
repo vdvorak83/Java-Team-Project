@@ -1,8 +1,10 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.security.state.TransactionState;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,19 +24,31 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    private String txid;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "amount")
+    @NotNull
     private BigDecimal amount;
 
-    @ManyToOne
+    private BigDecimal fee;
+
+    @OneToOne
+    @JoinColumn(name = "from_wallet")
     private Wallet fromWallet;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "to_wallet")
     private Wallet toWallet;
 
     @Column(name = "date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     private Date date;
+
+    @Enumerated(EnumType.ORDINAL)
+    private TransactionState state;
 }

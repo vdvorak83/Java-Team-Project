@@ -3,6 +3,8 @@ package com.skyforce.goal.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -18,8 +20,14 @@ public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "address")
+    @NotNull
     private String address;
+    
+    @NotNull
+    private boolean our;
+
+    private BigDecimal balance;
 }
