@@ -3,6 +3,7 @@ package com.skyforce.goal.controller;
 import com.skyforce.goal.form.SendMoneyForm;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.Wallet;
+import com.skyforce.goal.repository.TransactionRepository;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.repository.WalletRepository;
 import com.skyforce.goal.security.role.UserRole;
@@ -26,16 +27,28 @@ public class MoneyController {
     private final MoneyService moneyService;
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
+    private final TransactionRepository transactionRepository;
 
     private final SendMoneyFormValidator sendMoneyFormValidator;
 
     @Autowired
-    public MoneyController(AuthenticationService authenticationService, MoneyService moneyService, UserRepository userRepository, WalletRepository walletRepository, SendMoneyFormValidator sendMoneyFormValidator) {
+    public MoneyController(AuthenticationService authenticationService, MoneyService moneyService,
+                           UserRepository userRepository, WalletRepository walletRepository,
+                           TransactionRepository transactionRepository, SendMoneyFormValidator sendMoneyFormValidator) {
         this.authenticationService = authenticationService;
         this.moneyService = moneyService;
         this.userRepository = userRepository;
         this.walletRepository = walletRepository;
+        this.transactionRepository = transactionRepository;
         this.sendMoneyFormValidator = sendMoneyFormValidator;
+    }
+
+    @GetMapping("/money")
+    public String dashboard(Authentication authentication, Model model) {
+        User user = authenticationService.getUserByAuthentication(authentication);
+        model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
+        model.addAttribute("transactions", transactionRepository.findAllOrderByDate());
+        return "money";
     }
 
     @GetMapping("/admin/money")
@@ -74,17 +87,16 @@ public class MoneyController {
     public String sendMoney(Authentication authentication, Model model, @ModelAttribute("sendMoneyForm") @Valid SendMoneyForm form) {
         User loggedUser = authenticationService.getUserByAuthentication(authentication);
         User user = userRepository.findUserById(form.getId());
-        if (user.getRole().equals(UserRole.USER) && (loggedUser.getId().equals(user.getId())) || !loggedUser.getRole().equals(UserRole.USER)) {
-            moneyService.sendMoney(user, form.getAddress(), form.getAmount());
-        } else {
-            // TODO Better error handling.
-            return "404";
+        if (user == null) {
+            user = loggedUser;
         }
+        moneyService.sendMoney(user, form.getAddress(), form.getAmount());
+
         model.addAttribute("users", userRepository.findAll().stream()
                 .filter(u -> u.getRole().equals(UserRole.USER))
                 .collect(Collectors.toList()));
         model.addAttribute("user", loggedUser);
-        return "admin-money";
+        return "redirect:/money";
     }
 
     @InitBinder("sendMoneyForm")

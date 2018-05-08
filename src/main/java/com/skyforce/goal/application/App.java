@@ -1,6 +1,7 @@
 package com.skyforce.goal.application;
 
 import com.google.gson.Gson;
+import com.skyforce.goal.service.MoneySyncService;
 import com.skyforce.goal.util.GoalStatusUtil;
 import com.skyforce.goal.util.blockio.BlockioWebsocket;
 import org.springframework.boot.SpringApplication;
@@ -26,10 +27,11 @@ public class App {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(App.class, args);
-        // Uncomment lines below if you need to use cryptocurrency.
-        //blockioWebsocket.connect();
-        //MoneySyncService moneySyncService = context.getBean(MoneySyncService.class);
-        //moneySyncService.updateTransactions();
+        //Todo
+        blockioWebsocket = context.getBean(BlockioWebsocket.class);
+        blockioWebsocket.connect();
+        MoneySyncService moneySyncService = context.getBean(MoneySyncService.class);
+        moneySyncService.updateTransactions();
         GoalStatusUtil goalStatusUtil = context.getBean(GoalStatusUtil.class);
         goalStatusUtil.update();
         goalStatusUtil.enableRegulularUpdate();

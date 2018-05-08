@@ -7,10 +7,10 @@ import com.skyforce.goal.dto.money.blockio.WithdrawDto;
 import com.skyforce.goal.model.Transaction;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.Wallet;
+import com.skyforce.goal.model.enums.TransactionState;
 import com.skyforce.goal.repository.TransactionRepository;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.repository.WalletRepository;
-import com.skyforce.goal.model.enums.TransactionState;
 import com.skyforce.goal.service.MoneyService;
 import com.skyforce.goal.service.MoneySyncService;
 import com.skyforce.goal.util.blockio.BlockioWebsocket;
@@ -110,8 +110,10 @@ public class BlockIoMoneyServiceImpl implements MoneyService {
         if (fee == null)
             return false;
 
+        amount = amount.subtract(fee);
+
         // User should have more money in wallet than sending amount + fee.
-        if (user.getMoney().compareTo(amount.add(fee)) < 0) {
+        if (user.getMoney().compareTo(amount) < 0) {
             return false;
         }
 

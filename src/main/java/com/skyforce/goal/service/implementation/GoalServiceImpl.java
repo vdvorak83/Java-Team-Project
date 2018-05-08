@@ -45,7 +45,6 @@ public class GoalServiceImpl implements GoalService {
     public Goal createGoal(GoalDto goalDto, Authentication authentication) {
         User user = authenticationService.getUserByAuthentication(authentication);
 
-        System.out.println("Hello goal is creating");
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         Goal newGoal = Goal.builder()

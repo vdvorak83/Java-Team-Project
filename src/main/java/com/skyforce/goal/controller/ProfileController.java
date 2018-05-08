@@ -46,7 +46,7 @@ public class ProfileController {
     }
 
     @PostMapping("/user/profile")
-    public String getGoalCreated(Authentication authentication, @ModelAttribute("goalForm") @Valid GoalDto goalDto, Model model,
+    public String createGoal(Authentication authentication, @ModelAttribute("goalForm") @Valid GoalDto goalDto, Model model,
                                  RedirectAttributes redirectAttributes) {
         User user = authenticationService.getUserByAuthentication(authentication);
         if (goalDto.getPrice().compareTo(user.getMoney()) > 0) {
