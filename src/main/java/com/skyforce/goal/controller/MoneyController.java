@@ -1,6 +1,7 @@
 package com.skyforce.goal.controller;
 
 import com.skyforce.goal.form.SendMoneyForm;
+import com.skyforce.goal.model.Transaction;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.Wallet;
 import com.skyforce.goal.repository.TransactionRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +49,10 @@ public class MoneyController {
     public String dashboard(Authentication authentication, Model model) {
         User user = authenticationService.getUserByAuthentication(authentication);
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
-        model.addAttribute("transactions", transactionRepository.findAllOrderByDate());
+        List<Transaction> transactions = transactionRepository.findAll().stream()
+                .filter(t -> t.getUser().equals(user)).collect(Collectors.toList());
+        Collections.reverse(transactions);
+        model.addAttribute("transactions", transactions);
         return "money";
     }
 

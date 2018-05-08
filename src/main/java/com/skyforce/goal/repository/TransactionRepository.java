@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findAllOrderByDate();
-
     List<Transaction> findAllByDate(Date date);
 
     List<Transaction> findAllByDateAndState(Date date, TransactionState state);
