@@ -1,14 +1,16 @@
 package com.skyforce.goal.controller;
 
-import com.skyforce.goal.dto.UserDto;
+import com.skyforce.goal.exception.EmailExistsException;
+import com.skyforce.goal.form.UserRegistrationForm;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.service.RegistrationService;
-import com.skyforce.goal.exception.EmailExistsException;
+import com.skyforce.goal.validator.UserRegistrationFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,15 +21,10 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
-    private UserDto userDto;
+    private UserRegistrationForm userRegistrationForm;
 
-    /*@Autowired
-    private UserRegistrationFormValidator userRegistrationFormValidator;*/
-
-    /*@InitBinder("registrationForm")
-    public void initUserFormValidator(WebDataBinder binder) {
-        binder.addValidators(userRegistrationFormValidator);
-    }*/
+    @Autowired
+    private UserRegistrationFormValidator userRegistrationFormValidator;
 
     @GetMapping("/register")
     public String register(Model model, Authentication authentication) {
@@ -35,23 +32,22 @@ public class RegistrationController {
             return "redirect:/";
         }
 
-        UserDto userDto = new UserDto();
+        UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
 
-        model.addAttribute("user", userDto);
+        model.addAttribute("user", userRegistrationForm);
 
         return "registration";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") @Valid UserDto userDto, BindingResult errors,
-                           RedirectAttributes redirectAttributes) {
+    public String register(@ModelAttribute("registrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult errors) {
         User registered;
 
         if (errors.hasErrors()) {
             return "registration";
         } else {
             try {
-                registered = registrationService.register(userDto);
+                registered = registrationService.register(userRegistrationForm);
             } catch (EmailExistsException e) {
                 return "registration";
             }
@@ -72,7 +68,7 @@ public class RegistrationController {
     }
 
     /*@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto,
+    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationForm accountDto,
              BindingResult result, WebRequest request, Errors errors) {
         User registered = new User();
 
@@ -85,7 +81,7 @@ public class RegistrationController {
         // rest of the implementation
     }
 
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
+    private User createUserAccount(UserRegistrationForm accountDto, BindingResult result) {
         User registered = null;
         try {
             registered = service.registerNewUserAccount(accountDto);
@@ -94,4 +90,9 @@ public class RegistrationController {
         }
         return registered;
     }*/
+
+    @InitBinder("registrationForm")
+    public void initUserFormValidator(WebDataBinder binder) {
+        binder.addValidators(userRegistrationFormValidator);
+    }
 }

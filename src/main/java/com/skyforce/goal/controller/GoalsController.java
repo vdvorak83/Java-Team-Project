@@ -31,19 +31,20 @@ public class GoalsController {
         return "goals";
     }
 
-    @GetMapping("goal/{id}")
-    public String getGoalPage(Authentication authentication,Model model, @PathVariable("id") Long id) {
+    @GetMapping("/goal/{id}")
+    public String getGoalPage(Authentication authentication, Model model, @PathVariable("id") Long id) {
         Goal goal = goalService.findGoalById(id);
         model.addAttribute("goal", goal);
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
 //        model.addAttribute("user", userService.findUserByLogin(login));
         return "goal";
     }
+
     @GetMapping("/user/myGoals")
-    public String getMyGoals(Authentication authentication,Model model){
+    public String getMyGoals(Authentication authentication, Model model) {
         User user = authenticationService.getUserByAuthentication(authentication);
-        model.addAttribute("user",user);
-        model.addAttribute("myGoals",goalService.findGoalsByUser(user));
+        model.addAttribute("user", user);
+        model.addAttribute("myGoals", goalService.findGoalsByUser(user));
 
         return "my-goals";
     }

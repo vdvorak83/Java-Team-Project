@@ -16,7 +16,8 @@
             padding-left: 0.5%;
             float: left;
         }
-        #description{
+
+        #description {
             overflow: auto;
         }
 
@@ -37,9 +38,11 @@
             <div class="three wide column">
                 <div class="ui cards">
                     <div class="ui card">
-                        <div class="image">
-                            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
-                        </div>
+                        <th:block th:if="${goal.getImage() != null}">
+                            <div class="image">
+                                <img src="/img/Kristy.png" th:src="/storage/${goal.getImage().getFileName()}"/>
+                            </div>
+                        </th:block>
                         <div class="content left aligned">
                             <a class="header" th:text="${goal.getName()}" th:href="@{'/goal/' + ${goal.getId()}}"></a>
                             <div class="meta">
@@ -50,7 +53,7 @@
                             <!--<div class="description">-->
                             <!--<span th:text="${goal.getDescription()}">-->
                             <!--</span>-->
-                            </div>
+                        </div>
                         <div class="extra content">
                             <span class="left floated">
                                 <i class="like icon"></i>

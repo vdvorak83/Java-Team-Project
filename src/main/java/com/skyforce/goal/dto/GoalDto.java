@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -15,7 +16,7 @@ import java.util.Date;
 public class GoalDto {
     private String goalName;
     private String description;
-    private int price;
+    private BigDecimal price;
     private Date dateEnd;
     private String checkpointName;
     private String checkpointDescription;

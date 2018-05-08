@@ -1,7 +1,7 @@
 package com.skyforce.goal.repository;
 
 import com.skyforce.goal.model.Transaction;
-import com.skyforce.goal.security.state.TransactionState;
+import com.skyforce.goal.model.enums.TransactionState;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

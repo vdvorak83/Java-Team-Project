@@ -6,10 +6,10 @@ import com.skyforce.goal.dto.money.blockio.SentTransactionBlockioDto;
 import com.skyforce.goal.model.Transaction;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.Wallet;
+import com.skyforce.goal.model.enums.TransactionState;
 import com.skyforce.goal.repository.TransactionRepository;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.repository.WalletRepository;
-import com.skyforce.goal.security.state.TransactionState;
 import com.skyforce.goal.service.MoneySyncService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,6 +67,7 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
         try {
             dto = restTemplate.getForObject(requestUrl, GetBalanceDto.class);
         } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
 
@@ -83,6 +84,7 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
         }
     }
 
+    // Starts at boot
     @EventListener(ApplicationReadyEvent.class)
     @Override
     public void updateTransactions() {
@@ -136,7 +138,7 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
         boolean found = false;
         do {
             for (ReceivedTransactionBlockioDto.TransactionsBlockioData.TransactionBlockio transaction : transactionsReceived) {
-                Date transactionDate = new Date(transaction.getTime()*1000);
+                Date transactionDate = new Date(transaction.getTime() * 1000);
                 if (lastReceivedDate.compareTo(transactionDate) > 0) {
                     found = true;
                     break;
@@ -153,14 +155,15 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
                     amount = amount.add(new BigDecimal(amountReceived.getAmount()));
                 }
 
-                Transaction newTransaction = new Transaction();
-                newTransaction.setFromWallet(fromWallet);
-                newTransaction.setToWallet(toWallet);
-                newTransaction.setAmount(amount);
-                newTransaction.setDate(transactionDate);
-                newTransaction.setUser(userRepository.findUserByWallet(toWallet));
-                newTransaction.setTxid(transaction.getTxid());
-                newTransaction.setState(TransactionState.RECEIVED);
+                Transaction newTransaction = Transaction.builder()
+                        .walletTo(toWallet)
+                        .walletFrom(fromWallet)
+                        .amount(amount)
+                        .date(transactionDate)
+                        .user(userRepository.findUserByWallet(toWallet))
+                        .txid(transaction.getTxid())
+                        .state(TransactionState.RECEIVED)
+                        .build();
                 transactions.add(newTransaction);
 
                 user.setMoney(user.getMoney().add(amount));
@@ -186,7 +189,7 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
         found = false;
         do {
             for (SentTransactionBlockioDto.TransactionsBlockioData.TransactionBlockio transaction : transactionsSent) {
-                Date transactionDate = new Date(transaction.getTime()*1000);
+                Date transactionDate = new Date(transaction.getTime() * 1000);
                 if (lastSentDate.compareTo(transactionDate) > 0) {
                     found = true;
                     break;
@@ -203,15 +206,16 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
                     amount = amount.add(new BigDecimal(amountReceived.getAmount()));
                 }
 
-                Transaction newTransaction = new Transaction();
-                newTransaction.setFromWallet(fromWallet);
-                newTransaction.setToWallet(toWallet);
-                newTransaction.setAmount(amount);
-                newTransaction.setFee(new BigDecimal(transaction.getAmountTotal()).subtract(amount));
-                newTransaction.setDate(transactionDate);
-                newTransaction.setUser(user);
-                newTransaction.setTxid(transaction.getTxid());
-                newTransaction.setState(TransactionState.SENT);
+                Transaction newTransaction = Transaction.builder()
+                        .walletFrom(fromWallet)
+                        .walletTo(toWallet)
+                        .amount(amount)
+                        .fee(new BigDecimal(transaction.getAmountTotal()).subtract(amount))
+                        .date(transactionDate)
+                        .user(user)
+                        .txid(transaction.getTxid())
+                        .state(TransactionState.SENT)
+                        .build();
                 transactions.add(newTransaction);
 
                 user.setMoney(user.getMoney().subtract(new BigDecimal(transaction.getAmountTotal())));
@@ -240,12 +244,12 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
                     transactionRepository.save(transaction);
             }
         } else {
-            transactionRepository.save(transactions);
+            transactionRepository.saveAll(transactions);
         }
     }
 
     @Override
-    public void resyncTransactions(){
+    public void resyncTransactions() {
         transactionRepository.deleteAll();
         updateTransactions();
     }

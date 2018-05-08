@@ -48,35 +48,31 @@ create table if not exists users
 (
 	id serial not null
 		constraint users_pkey
-			primary key,
+		primary key,
 	login varchar(50) not null,
 	password varchar(60) not null,
 	email varchar(254),
 	role_id smallint not null
 		constraint users_roles_id_fk
-			references user_roles
-				on update cascade,
+		references user_roles
+		on update cascade,
 	state smallint not null
 		constraint users_states_id_fk
-			references user_states
-				on update cascade,
+		references user_states
+		on update cascade,
 	money numeric(15,10) default 0,
 	reg_date timestamp not null,
 	wallet bigint
-		constraint fkct3gkv4sb9xme1bkb7bqheeph
-			references wallets
 		constraint users_wallets_id_fk
-			references wallets,
+		references wallets,
 	image_id bigint
-		constraint fkr33pbammf1phtaht5x1vn5y2b
-			references storage
 		constraint image_storage_id_fk
-			references storage,
+		references storage,
 	state_id integer,
 	temp_password varchar(255),
 	uuid varchar(255)
 		constraint uk_6km2m9i3vjuy36rnvkgj1l61s
-			unique
+		unique
 )
 ;
 
@@ -130,25 +126,31 @@ create table if not exists goal_states
 )
 ;
 
--- Цели.
+-- Goals.
 create table if not exists goals
 (
 	id bigserial not null
 		constraint goals_pkey
-			primary key,
+		primary key,
 	user_id bigserial not null
+		constraint fkb1mp6ulyqkpcw6bc1a2mr7v1g
+		references users
 		constraint goals_users_id_fk
-			references users,
+		references users,
 	name varchar(64) not null,
 	description varchar(1500),
 	money numeric(15,10),
 	state smallint not null
 		constraint goals_goal_states_id_fk
-			references goal_states
-				on update cascade,
+		references goal_states
+		on update cascade,
 	date_end timestamp,
 	date_start date,
-	price numeric(19,2)
+	price numeric(19,2),
+	title varchar(255),
+	image bigint
+		constraint goals_storage_id_fk
+		references storage
 )
 ;
 
@@ -170,7 +172,7 @@ create table if not exists money_history
 		constraint money_history_goals_id_fk
 		references goals
 		on update cascade,
-	direction boolean not null,
+	direction smallint not null,
 	amount numeric(15,10) not null,
 	date timestamp
 )
@@ -203,17 +205,13 @@ create table if not exists users_followings
 (
 	id bigserial not null
 		constraint users_followings_pkey
-			primary key,
+		primary key,
 	following_id integer
-		constraint fk8pfpgcs3hxdlf5v639cwvlo1v
-			references users
 		constraint follower_id_fk
-			references users,
+		references users,
 	user_id integer
-		constraint fk8csdqiviiaaxejyi2cktmr5tu
-			references users
 		constraint user_id_fk
-			references users
+		references users
 )
 ;
 

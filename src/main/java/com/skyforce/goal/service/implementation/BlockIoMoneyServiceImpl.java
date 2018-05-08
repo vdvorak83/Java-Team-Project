@@ -10,7 +10,7 @@ import com.skyforce.goal.model.Wallet;
 import com.skyforce.goal.repository.TransactionRepository;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.repository.WalletRepository;
-import com.skyforce.goal.security.state.TransactionState;
+import com.skyforce.goal.model.enums.TransactionState;
 import com.skyforce.goal.service.MoneyService;
 import com.skyforce.goal.service.MoneySyncService;
 import com.skyforce.goal.util.blockio.BlockioWebsocket;
@@ -116,13 +116,14 @@ public class BlockIoMoneyServiceImpl implements MoneyService {
         }
 
         // Add transaction to history.
-        Transaction transaction = new Transaction();
-        transaction.setUser(user);
-        transaction.setFromWallet(walletFrom);
-        transaction.setToWallet(walletTo);
-        transaction.setAmount(amount);
-        transaction.setFee(fee);
-        transaction.setDate(new Date(System.currentTimeMillis()));
+        Transaction transaction = Transaction.builder()
+                .user(user)
+                .walletTo(walletTo)
+                .walletFrom(walletFrom)
+                .amount(amount)
+                .fee(fee)
+                .date(new Date())
+                .build();
 
         WithdrawDto dto;
         try {

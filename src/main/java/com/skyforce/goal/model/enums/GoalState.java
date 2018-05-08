@@ -1,4 +1,4 @@
-package com.skyforce.goal.security.state;
+package com.skyforce.goal.model.enums;
 
 public enum GoalState {
     INPROGRESS(1),

@@ -1,6 +1,6 @@
 package com.skyforce.goal.model;
 
-import com.skyforce.goal.security.state.TransactionState;
+import com.skyforce.goal.model.enums.TransactionState;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,11 +38,11 @@ public class Transaction {
 
     @OneToOne
     @JoinColumn(name = "from_wallet")
-    private Wallet fromWallet;
+    private Wallet walletFrom;
 
     @OneToOne
     @JoinColumn(name = "to_wallet")
-    private Wallet toWallet;
+    private Wallet walletTo;
 
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)

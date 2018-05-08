@@ -1,5 +1,6 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.model.enums.MoneyDirection;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,7 +33,7 @@ public class MoneyHistoryEntry {
     private BigDecimal amount;
 
     @Column(name = "direction")
-    private boolean direction;
+    private MoneyDirection direction;
 
     @Column(name = "date")
     @Temporal(TemporalType.DATE)

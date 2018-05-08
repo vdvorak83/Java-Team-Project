@@ -1,6 +1,6 @@
 package com.skyforce.goal.validation;
 
-import com.skyforce.goal.dto.UserDto;
+import com.skyforce.goal.form.UserRegistrationForm;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,7 +13,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
-        UserDto form = (UserDto) object;
+        UserRegistrationForm form = (UserRegistrationForm) object;
 
         return form.getPassword().equals(form.getMatchingPassword());
     }

@@ -8,28 +8,29 @@ import com.skyforce.goal.service.MoneySyncService;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 
+@Component
+@Scope("singleton")
 public class BlockioWebsocket extends WebSocketClient {
 
-    @Autowired
-    private Gson gson;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private WalletRepository walletRepository;
-
-    @Autowired
-    private MoneySyncService moneySyncService;
-
+    private final Gson gson;
+    private final UserRepository userRepository;
+    private final WalletRepository walletRepository;
+    private final MoneySyncService moneySyncService;
     private SubscribeBalanceChangeDto subscribeBalanceChangeDto;
 
-    public BlockioWebsocket() {
+    @Autowired
+    public BlockioWebsocket(Gson gson, UserRepository userRepository, WalletRepository walletRepository, MoneySyncService moneySyncService) {
         super(URI.create("wss://n.block.io/"));
         this.subscribeBalanceChangeDto = new SubscribeBalanceChangeDto();
+        this.gson = gson;
+        this.userRepository = userRepository;
+        this.walletRepository = walletRepository;
+        this.moneySyncService = moneySyncService;
     }
 
     @Override

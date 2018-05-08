@@ -1,5 +1,6 @@
 package com.skyforce.goal.model;
 
+import com.skyforce.goal.model.enums.GoalState;
 import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.security.state.UserState;
 import lombok.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -71,6 +73,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Goal> goals;
+
+    public List<Goal> getGoalsByState(GoalState goalState){
+        return goals.stream().filter(g->g.getState().equals(goalState)).collect(Collectors.toList());
+    }
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "wallet")
