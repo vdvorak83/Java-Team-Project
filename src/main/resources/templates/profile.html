@@ -12,12 +12,16 @@
         });
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"/>-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/flatpickr/flatpickr.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/flatpickr/dark.css"/>
 
-    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <!--<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>-->
+    <script src="/js/flatpickr.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>-->
+    <script src="/js/semantic/dimmer.js"></script>
 </head>
 <body>
 
@@ -25,51 +29,53 @@
 
 <div>
     <div id="main-content">
-        <div class="ui card ai" id="cards">
-            <div class="ui slide masked reveal image"><img id="picGoal" class="visible content"
-                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
-            </div>
-            <div class="content"><a class="header">My last goal</a>
-                <div class="description">Description of this goal</div>
-            </div>
-            <div class="extra content">
-                <div class="ui indicating progress active" data-percent="20">
-                    <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
-                    <div class="label">Goal in Progress</div>
+        <th:block th:each="goal : ${goals}">
+            <div class="ui card ai" id="cards">
+                <div class="ui slide masked reveal image"><img id="picGoal" class="visible content"
+                                                               src="https://pngicon.ru//data/media/2/kubok.png"/>
+                </div>
+                <div class="content"><a class="header" th:text="${goal.getName()}">Goal name</a>
+                    <div class="description" th:text="${goal.getDescription()}">Description of the goal</div>
+                </div>
+                <div class="extra content">
+                    <div class="ui indicating progress active" data-percent="20">
+                        <div class="bar" style="transition-duration: 300ms; width: 80%;"></div>
+                        <div class="label">Goal in Progress</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="ui card ai" id="cards2">
-            <div class="ui slide masked reveal image"><img id="picGoal2" class="visible content"
-                                                           src="https://pngicon.ru//data/media/2/kubok.png"/>
-                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
-            <div class="content"><a class="header">My last goal #2</a>
-                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
-                <div class="description">Description of this goal</div>
-            </div>
-            <div class="extra content">
-                <div class="ui indicating progress active" data-percent="50">
-                    <div class="bar" style="transition-duration: 300ms; width: 30%;"></div>
-                    <div class="label">Goal in Progress</div>
-                </div>
-            </div>
-        </div>
+        </th:block>
+        <!--<div class="ui card ai" id="cards2">-->
+        <!--<div class="ui slide masked reveal image"><img id="picGoal2" class="visible content"-->
+        <!--src="https://pngicon.ru//data/media/2/kubok.png"/>-->
+        <!--<img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>-->
+        <!--<div class="content"><a class="header">My last goal #2</a>-->
+        <!--&lt;!&ndash;<div class="meta"><span class="date">Date of creation</span></div>&ndash;&gt;-->
+        <!--<div class="description">Description of this goal</div>-->
+        <!--</div>-->
+        <!--<div class="extra content">-->
+        <!--<div class="ui indicating progress active" data-percent="50">-->
+        <!--<div class="bar" style="transition-duration: 300ms; width: 30%;"></div>-->
+        <!--<div class="label">Goal in Progress</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-        <div class="ui card ai" id="cards3">
-            <div class="ui slide masked reveal image">
-                <img id="picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>
-                <img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>
-            <div class="content"><a class="header">My last goal #3</a>
-                <!--<div class="meta"><span class="date">Date of creation</span></div>-->
-                <div class="description">Description of this goal</div>
-            </div>
-            <div class="extra content">
-                <div class="ui indicating progress active" data-percent="80">
-                    <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
-                    <div class="label">Goal in Progress</div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="ui card ai" id="cards3">-->
+        <!--<div class="ui slide masked reveal image">-->
+        <!--<img id="picGoal3" class="visible content" src="https://pngicon.ru//data/media/2/kubok.png"/>-->
+        <!--<img class="hidden content" src="http://alexlusitania.com/img/betafantastika_ice_hockey.jpg"/></div>-->
+        <!--<div class="content"><a class="header">My last goal #3</a>-->
+        <!--&lt;!&ndash;<div class="meta"><span class="date">Date of creation</span></div>&ndash;&gt;-->
+        <!--<div class="description">Description of this goal</div>-->
+        <!--</div>-->
+        <!--<div class="extra content">-->
+        <!--<div class="ui indicating progress active" data-percent="80">-->
+        <!--<div class="bar" style="transition-duration: 300ms; width: 50%;"></div>-->
+        <!--<div class="label">Goal in Progress</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
     </div>
 
     <div id="MainProfile">
@@ -95,9 +101,10 @@
                         </div>
                         <th:block th:switch="${user.getImage()}">
                             <th:block th:case="null">
-                                <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                                <!--<img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>-->
+                                <img src="/img/Kristy.png"/>
                             </th:block>
-                            <th:block>
+                            <th:block th:case="*">
                                 <img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}"/>
                             </th:block>
                         </th:block>
@@ -105,7 +112,7 @@
                     <div class="content">
                         <a class="header" th:text="${user.getLogin()}"></a>
                         <div class="meta">
-                            <span class="header" th:text="${user.getRegDate()}"></span>
+                            <a class="header" th:text="${user.getMoney().toString()} + ' BTC'" th:href="@{/money}"></a>
                         </div>
                         <div class="description">
                         </div>
@@ -119,13 +126,22 @@
                 </div>
             </div>
             <div class="ui vertical buttons" id="verticalBut">
-                <button class="ui button"> <a th:href="@{/user/following}">Following</a></button>
+                <button class="ui button"><a th:href="@{/user/following}">Following</a></button>
                 <button class="ui button"><a th:href="@{/user/followers}">Followers</a></button>
                 <button class="ui button"><a th:href="@{/user/myGoals}">My goals</a></button>
             </div>
             <!--<button th:href="@{/user/subscriptions}">Following</button>-->
         </div>
     </div>
+    <th:block th:if="${error != null}">
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                Error
+            </div>
+            <p th:text="${error}">Error description
+            </p></div>
+    </th:block>
     <form class="ui form" id="mainForm" method="post" name="GoalForm" th:action="@{'/user/profile'}">
         <!--<div class="ui form"   >-->
         <div class="fields">

@@ -36,12 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
-                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/admin/*").hasAuthority("ADMIN")
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/confirm/*").permitAll()
+                .antMatchers("/money/*").authenticated()
                 .antMatchers("/css/*").permitAll()
                 .antMatchers("/js/*").permitAll()
+                .antMatchers("/img/*").permitAll()
+                .antMatchers("/storage/*").permitAll()
                 .antMatchers("/assets/*").permitAll()
                 .antMatchers("/templates/static/*").permitAll()
                 .antMatchers("/").permitAll()
@@ -55,12 +58,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                 .alwaysRemember(true)
+                .rememberMeParameter("remember-me")
                 .rememberMeCookieName("remember-me")
+                .tokenValiditySeconds(1209600)
                 .tokenRepository(persistentTokenRepository())
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .deleteCookies("remember-me")
+                .logoutSuccessUrl("/")
                 .permitAll();
 
         security.csrf().disable();

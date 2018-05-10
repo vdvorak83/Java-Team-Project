@@ -6,7 +6,8 @@
 
     <link href="/css/profile.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+    <script src="/js/vendor/jquery.min.js"></script>
 </head>
 <body>
 <div th:include="fragments/header :: navbar"></div>
@@ -73,9 +74,10 @@
                     </div>
                     <th:block th:switch="${thisUser.getImage()}">
                         <th:block th:case="null">
-                            <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
+                            <!--<img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>-->
+                            <img src="/img/Kristy.png"/>
                         </th:block>
-                        <th:block>
+                        <th:block th:case="*">
                             <img th:src="@{'~/storage/' + ${thisUser.getImage().getFileName()}}"/>
                         </th:block>
                     </th:block>

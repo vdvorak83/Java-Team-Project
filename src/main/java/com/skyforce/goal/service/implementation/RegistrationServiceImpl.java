@@ -1,14 +1,13 @@
 package com.skyforce.goal.service.implementation;
 
-import com.skyforce.goal.dto.UserDto;
-import com.skyforce.goal.model.Image;
+import com.skyforce.goal.exception.EmailExistsException;
+import com.skyforce.goal.form.UserRegistrationForm;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.security.state.UserState;
 import com.skyforce.goal.service.RegistrationService;
 import com.skyforce.goal.util.SmtpMailSender;
-import com.skyforce.goal.exception.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,48 +22,45 @@ import java.util.concurrent.Executors;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private SmtpMailSender mailSender;
-
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @Override
-    public User register(UserDto userDto) throws EmailExistsException {
-        if (emailExists(userDto.getEmail())) {
+    public User register(UserRegistrationForm userRegistrationForm) throws EmailExistsException {
+        if (emailExists(userRegistrationForm.getEmail())) {
             throw new EmailExistsException("There is an account with that e-mail address: " +
-                    userDto.getEmail());
+                    userRegistrationForm.getEmail());
         }
-
-        Image defaultImage = Image.builder().id(8L).build();
+        UserState userState = userRegistrationForm.isCheckEmail() ? UserState.NOT_ACTIVE : UserState.ACTIVE;
 
         User newUser = User.builder()
-                .login(userDto.getLogin())
-                .email(userDto.getEmail())
-                .password(passwordEncoder.encode(userDto.getPassword()))
+                .login(userRegistrationForm.getLogin())
+                .email(userRegistrationForm.getEmail())
+                .password(passwordEncoder.encode(userRegistrationForm.getPassword()))
                 .regDate(new Date())
                 .role(UserRole.USER)
-                .state(UserState.NOT_ACTIVE)
+                .state(userState)
                 .uuid(UUID.randomUUID().toString())
-                .image(defaultImage)
                 .build();
 
         userRepository.save(newUser);
 
-        System.out.println(newUser.getEmail());
+        if (userRegistrationForm.isCheckEmail()) {
+            System.out.println(newUser.getEmail());
 
-        executorService.submit(() -> {
-            try {
-                mailSender.send(newUser.getEmail(), "Please confirm your registration",
-                        "http://localhost:8080/confirm/" + newUser.getUuid());
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-        });
+            executorService.submit(() -> {
+                try {
+                    mailSender.send(newUser.getEmail(), "Please confirm your registration",
+                            "http://localhost:8080/confirm/" + newUser.getUuid());
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
 
         return newUser;
     }
@@ -76,7 +72,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            user.setState(UserState.ACTIVE);
+            if (user.getState().equals(UserState.NOT_ACTIVE))
+                user.setState(UserState.ACTIVE);
             user.setUuid(null);
 
             userRepository.save(user);

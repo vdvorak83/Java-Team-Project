@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Java-Team-Project.iml" filepath="$PROJECT_DIR$/Java-Team-Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/goal.iml" filepath="$PROJECT_DIR$/goal.iml" />
     </modules>
   </component>

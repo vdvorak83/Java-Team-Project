@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <div th:include="fragments/header :: head"></div>
+
+    <title>Manage money</title>
+
+    <style>
+        #main-content {
+            padding-top: 4.5%;
+            padding-left: 0.5%;
+            float: left;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div th:include="fragments/header :: navbar"></div>
+
+<div id="main-content">
+    <div class="ui center aligned grid">
+        <table>
+        </table>
+
+        <table border="1">
+            <tbody>
+            <tr>
+                <th>Login</th>
+                <th>BTC Address</th>
+                <th>Money</th>
+            </tr>
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <td th:text="${user.getLogin()}">Login</td>
+                    <td th:if="${user.getWallet()} == null or ${user.getWallet().getAddress()} == null">
+                        <form th:action="@{/money/create}" method="post">
+                            <input type="hidden" name="id" th:value="${user.getId()}"/>
+                            <input type="submit" value="Create wallet"/>
+                        </form>
+                    </td>
+                    <td th:unless="${user.getWallet()} == null or ${user.getWallet().getAddress()} == null"
+                        th:text="${user.getWallet().getAddress()}">Address
+                    </td>
+                    <td th:text="${user.getMoney()}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <form th:action="@{/money/send}" method="post">
+            <select name="id">
+                <option
+                        th:each="user: ${users}"
+                        th:value="${user.getId()}"
+                        th:text="${user.getLogin()}" ></option>
+            </select>
+            <div>
+                <label>Address</label>
+                <input type="text" name="address"/>
+            </div>
+            <div>
+                <label>Amount</label>
+                <input type="text" name="amount"/>
+            </div>
+            <input type="submit" value="Send money"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

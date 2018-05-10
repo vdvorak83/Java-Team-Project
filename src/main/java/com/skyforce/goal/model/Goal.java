@@ -1,11 +1,10 @@
 package com.skyforce.goal.model;
 
-import com.skyforce.goal.security.state.GoalState;
+import com.skyforce.goal.model.enums.GoalState;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -54,4 +53,8 @@ public class Goal {
 
     @OneToMany(mappedBy = "goal", fetch = FetchType.EAGER)
     private List<Checkpoint> checkpoints;
+
+    @OneToOne
+    @JoinColumn(name = "image")
+    private Image image;
 }

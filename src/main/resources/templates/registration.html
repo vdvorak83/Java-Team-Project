@@ -4,16 +4,22 @@
     <title>Registration</title>
     <meta charset="UTF-8"/>
 
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <!--<link rel="stylesheet" type="text/css"-->
+    <!--href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>-->
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/semantic.min.js"></script>
+    <script src="/js/semantic/transition.js"></script>
+    <script src="/js/semantic/form.js"></script>
 
     <style type="text/css">
         body {
+            background-color: #DADADA;
             overflow-x: hidden;
             min-width: auto;
         }
@@ -105,6 +111,12 @@
                         <i class="user icon"></i>
                         <input type="text" name="login" th:field="*{login}" placeholder="login"/>
                         <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input name="checkEmail" type="checkbox"/>
+                        <label>Check email</label>
                     </div>
                 </div>
                 <div class="field">

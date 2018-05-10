@@ -4,21 +4,27 @@
     <th:block th:fragment="head">
         <meta charset="UTF-8"/>
 
-        <link rel="stylesheet" type="text/css"
-              href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+        <!--<link rel="stylesheet" type="text/css"-->
+        <!--href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>-->
+        <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/dimmer.js"></script>-->
+        <script src="/js/vendor/jquery.min.js"></script>
+        <script src="/js/semantic.min.js"></script>
+        <script src="/js/semantic/transition.js"></script>
+        <script src="/js/semantic/form.js"></script>
+        <script src="/js/semantic/dimmer.js"></script>
 
         <style type="text/css">
             body {
                 background-color: #FFFFFF;
             }
 
-            .ui.menu  img.logo {
+            .ui.menu img.logo {
                 margin-right: 1.5em;
             }
 
@@ -30,12 +36,17 @@
 <div th:fragment="navbar">
     <div class="ui top fixed menu">
         <div class="ui container">
-            <a href="#" class="header item">
-                <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png"/>
-                Project Name
-            </a>
-            <a th:href="@{/user/profile}" class="item">Home</a>
-            <a th:href="@{/goals}" class="item">Goals</a>
+            <th:block th:switch="${user}">
+                <a href="#" class="header item" th:case="null" th:href="@{/}">
+                    <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png"/>
+                    Goalz Project
+                </a>
+                <a href="#" class="header item" th:case="*" th:href="@{/user/profile}">
+                    <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png"/>
+                    Goalz Project
+                </a>
+            </th:block>
+            <a th:href="@{/goals}" class="item">Explore</a>
             <a th:href="@{/people}" class="item">People</a>
             <!--<a th:href="@{/user/subscriptions}" class="item">Following</a>-->
         </div>
@@ -50,12 +61,11 @@
                 <i class="user icon"></i>
                 <div th:text="${user.getLogin()}"></div>
             </a>
-            <a class="ui item">
+            <a class="ui item" href="/logout">
                 <i class="sign out alternate icon"></i>
                 Logout
             </a>
             <!--<a class="ui item" th:href="@{/user/profile}" th:text="${user.getLogin()}">Profile</a>-->
-            <a class="ui item" href="/logout">Log out</a>
         </div>
     </div>
 </div>

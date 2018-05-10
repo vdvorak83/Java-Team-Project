@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
+    <script src="/js/vendor/jquery.min.js"></script>
+    <link href="/css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/vendor/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/vendor/dataTables.bootstrap4.css" rel="stylesheet">
+    <title>Manage money</title>
+</head>
+
+<body class="bg-dark" id="page-top">
+
+<div th:include="fragments/header :: navbar"></div>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+                <a href="#">Money dashboard</a>
+            </li>
+        </ol>
+        <!-- Icon Cards-->
+        <div class="row my-1">
+            <div class="col-xl-12 col-sm-12 mb-12">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        <div>
+                            Your address: <span th:text="${user.getWallet().getAddress()}"></span>
+                        </div>
+                        <div>
+                            Your balance: <span th:text="${user.getMoney().toString()}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/money/send}" method="post">
+            <div class="row my-1">
+                <div class="col-xl-12 col-sm-12 mb-12">
+                    <div class="card text-white bg-primary o-hidden h-100">
+                        <div class="card-body">
+                            <div>
+                                <label>Address</label>
+                                <input type="text" name="address"/>
+                            </div>
+                            <div>
+                                <label>Amount</label>
+                                <input type="text" name="amount"/>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn-primary bg-warning card-footer clearfix z-1"
+                               value="Send money"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i>Transaction history
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Amount</th>
+                            <th>Fee</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Amount</th>
+                            <th>Fee</th>
+                            <th>Date</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <th:block th:each="transaction : ${transactions}">
+                            <tr>
+                                <td th:text="${transaction.getWalletFrom().getAddress()}">
+                                    15u8aAPK4jJ5N8wpWJ5gutAyyeHtKX5i18
+                                </td>
+                                <td th:text="${transaction.getWalletTo().getAddress()}">
+                                    35u8aAPK4jJ5N8wpWJ5gutAyyeHtKX5i13
+                                </td>
+                                <td th:text="${transaction.getAmount().toString()}">0.4 BTC</td>
+                                <th:block th:if="${transaction.getFee()} != null">
+                                    <td th:text="${transaction.getFee().toString()}">0.0001 BTC</td>
+                                </th:block>
+                                <td th:unless="${transaction.getFee()} != null">N/A</td>
+                                <td th:text="${transaction.getDate().toLocaleString()}">20/01/2018</td>
+                            </tr>
+                            <th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="/js/vendor/jquery.dataTables.js"></script>
+    <script src="/js/vendor/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for this page-->
+    <script src="/js/vendor/sb-admin-datatables.min.js"></script>
+</div>
+
+</body>
+</html>

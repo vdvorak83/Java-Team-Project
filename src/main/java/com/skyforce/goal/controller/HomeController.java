@@ -20,7 +20,7 @@ public class HomeController {
 
             if (user.getRole().equals(UserRole.ADMIN)) {
                 return "redirect:/admin";
-            } else if (user.getRole().equals(UserRole.USER)){
+            } else if (user.getRole().equals(UserRole.USER)) {
                 return "redirect:/user/profile";
             }
         }
