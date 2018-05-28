@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log In</title>
+    <meta charset="UTF-8"/>
+    <div th:include="fragments/header :: head"></div>
+
+    <!--<link rel="stylesheet" type="text/css"-->
+          <!--href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/semantic.min.js"></script>
+    <script src="/js/semantic/transition.js"></script>
+    <script src="/js/semantic/form.js"></script>
+
+    <style type="text/css">
+        body {
+            overflow-x: hidden;
+            min-width: auto;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+
+    <script>
+        $(document)
+            .ready(function () {
+                $('.ui.form')
+                    .form({
+                        fields: {
+                            login: {
+                                identifier: 'login',
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Please enter your login'
+                                    }
+                                ]
+                            },
+                            password: {
+                                identifier: 'password',
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Please enter your password'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
+</head>
+
+<body>
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui blue image header">LOG IN</h2>
+        <form class="ui large form" th:method="post">
+            <div class="ui fluid segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="login" placeholder="login"/>
+                    </div>
+                </div>
+                <div class="field" align="left">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="password"/>
+                    </div>
+                </div>
+                <input type="submit" th:value="LOGIN" class="ui blue fluid large submit button"/>
+                <!--<div class="ui divider"></div>-->
+                <!--<div class="ui checkbox">
+                    <input type="checkbox" name="remember-me" id="remember-me-checkbox"/>
+                    <label for="remember-me-checkbox" style="cursor: pointer">REMEMBER ME</label>
+                </div>-->
+                <div class="ui horizontal divider" >via Social Networks</div>
+                <!--<div>Or login via Social Networks</div>-->
+                <!--<br/>-->
+                <a th:href="@{/}" class="ui circular vk icon button">
+                    <i class="vk icon"></i>
+                </a>
+                <a th:href="@{/}" class="ui circular facebook icon button">
+                    <i class="facebook icon"></i>
+                </a>
+                <a th:href="@{/}" class="ui circular twitter icon button">
+                    <i class="twitter icon"></i>
+                </a>
+            </div>
+            <div class="ui error message"></div>
+        </form>
+        <div class="ui warning message">
+            <!--Already signed up? <a href="#">Login here</a> instead.-->
+            Not with us yet? <a th:href="@{/register}"><strong>Create Account</strong></a>
+        </div>
+        <!--<div class="ui message">
+            <div class="header">
+                Login via Social Networks
+            </div>
+            <div class="ui divider"></div>
+            <button class="ui circular vk icon button">
+                <i class="vk icon"></i>
+            </button>
+            <button class="ui circular facebook icon button">
+                <i class="facebook icon"></i>
+            </button>
+            <button class="ui circular twitter icon button">
+                <i class="twitter icon"></i>
+            </button>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

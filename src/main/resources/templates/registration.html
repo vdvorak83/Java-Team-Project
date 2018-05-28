@@ -1,175 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="uk-height-1-1" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registration</title>
-    <meta charset="UTF-8"/>
-
-    <!--<link rel="stylesheet" type="text/css"-->
-    <!--href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>-->
-    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
-
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>-->
-    <script src="/js/vendor/jquery.min.js"></script>
-    <script src="/js/semantic.min.js"></script>
-    <script src="/js/semantic/transition.js"></script>
-    <script src="/js/semantic/form.js"></script>
-
-    <style type="text/css">
-        body {
-            background-color: #DADADA;
-            overflow-x: hidden;
-            min-width: auto;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-
-        /*#error {
-            padding-left: unset;
-            text-align: left;
-        }*/
-    </style>
-
-    <script>
-        $(document)
-            .ready(function () {
-                $('.ui.form')
-                    .form({
-                        fields: {
-                            login: {
-                                identifier: 'login',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Please enter your login'
-                                    },
-                                    {
-                                        type: 'length[5]',
-                                        prompt: 'Your login must be at least 5 characters'
-                                    }
-                                ]
-                            },
-                            email: {
-                                identifier: 'email',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Please enter your e-mail'
-                                    },
-                                    {
-                                        type: 'email',
-                                        prompt: 'Please enter a valid e-mail'
-                                    }
-                                ]
-                            },
-                            password: {
-                                identifier: 'password',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Please enter your password'
-                                    },
-                                    {
-                                        type: 'length[6]',
-                                        prompt: 'Your password must be at least 6 characters'
-                                    }
-                                ]
-                            },
-                            password_repeat: {
-                                identifier: 'password-repeat',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Passwords doesn\'t match'
-                                    },
-                                    {
-                                        type: 'match[password]',
-                                        prompt: 'Passwords doesn\'t match'
-                                    }
-                                ]
-                            }
-                        }
-                    })
-                ;
-            })
-        ;
-    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Register</title>
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/css/uikit.min.css"/>
 </head>
-
-<body>
-<div class="ui middle aligned center aligned grid">
-    <div class="column">
-        <h2 class="ui blue image header">CREATE ACCOUNT</h2>
-        <form class="ui large form" th:object="${user}" th:method="post">
-            <div class="ui fluid segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" name="login" th:field="*{login}" placeholder="login"/>
-                        <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+<body class="uk-height-1-1">
+<div class="uk-flex uk-flex-center uk-flex-middle uk-background-muted uk-height-viewport">
+    <div class="uk-width-medium uk-padding-small">
+        <form th:method="post" th:object="${user}">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Register</legend>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                        <input name="login" class="uk-input" required="required" placeholder="username" type="text" th:field="*{login}"/>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="ui checkbox">
-                        <input name="checkEmail" type="checkbox"/>
-                        <label>Check email</label>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail"></span>
+                        <input name="email" class="uk-input" required="required" placeholder="e-mail" type="text" th:field="*{email}"/>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="email" name="email" th:field="*{email}" placeholder="e-mail"/>
-                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                        <input name="password" class="uk-input" required="required" placeholder="password" type="password" th:field="*{password}"/>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="password" th:field="*{password}" placeholder="password"/>
-                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                        <input name="password-repeat" class="uk-input" required="required" placeholder="repeat password" type="password" th:field="*{matchingPassword}"/>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="password-repeat" th:field="*{matchingPassword}"
-                               placeholder="repeat password"/>
-                        <div th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></div>
-                    </div>
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-primary uk-button-primary uk-width-1-1">REGISTER</button>
                 </div>
-                <input type="submit" th:value="REGISTER" class="ui fluid large blue submit button"/>
-            </div>
-            <!--<div>
-                <ul>
-                    <li th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Please enter your login</li>
-                    <li th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></li>
-                    <li th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></li>
-                    <li th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></li>
-                </ul>
-            </div>-->
+            </fieldset>
         </form>
-
-        <div class="ui bottom attached warning message">
-            <!--Already signed up? <a href="#">Login here</a> instead.-->
-            Already have account? <a th:href="@{/login}"><strong>Sign In</strong></a>
+        <hr />
+        <div class="uk-text-center">
+            <p>Already have an account?</p>
+            <a th:href="@{/login}" class="uk-button uk-button-secondary">
+                <span class="ion-android-person-add"></span>&nbsp; Log in
+            </a>
         </div>
-
-        <div>
-            <div class="ui message error" id="error" th:errors="${user}">
-                <ul>
-                    <li th:if="${#fields.hasErrors('login')}" th:errors="*{user.login}">Please enter your login</li>
-                </ul>
-            </div>
-        </div>
-
-        <!--<div class="ui message">
-            Already have account? <a th:href="@{/login}"><strong>Sign In</strong></a>
-        </div>-->
     </div>
 </div>
+
+<!-- JS FILES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit-icons.min.js"></script>
 </body>
 </html>

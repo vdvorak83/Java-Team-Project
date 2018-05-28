@@ -112,7 +112,8 @@
                     <div class="content">
                         <a class="header" th:text="${user.getLogin()}"></a>
                         <div class="meta">
-                            <a class="header" th:text="${user.getMoney().toString()} + ' BTC'" th:href="@{/money}"></a>
+                            <a class="header" th:href="@{/money}">500 BTC</a>
+                            <!--<a class="header" th:text="${user.getMoney().toString()} + ' BTC'" th:href="@{/money}"></a>-->
                         </div>
                         <div class="description">
                         </div>

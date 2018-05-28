@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -40,24 +39,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("registrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult errors) {
-        User registered;
-
-        if (errors.hasErrors()) {
+    public String register(@ModelAttribute("registrationForm") UserRegistrationForm userRegistrationForm /*@ModelAttribute("registrationForm") @Valid UserRegistrationForm userRegistrationForm, BindingResult errors*/) {
+        try {
+            registrationService.register(userRegistrationForm);
+        } catch (EmailExistsException e) {
             return "registration";
-        } else {
-            try {
-                registered = registrationService.register(userRegistrationForm);
-            } catch (EmailExistsException e) {
-                return "registration";
-            }
         }
 
-        if (registered == null) {
-            errors.rejectValue("email", "message.regError");
-        }
-
-        return "registration";
+        return "redirect:/login";
     }
 
     @GetMapping("/confirm/{uuid}")

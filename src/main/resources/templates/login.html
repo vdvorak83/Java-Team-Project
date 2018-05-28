@@ -1,125 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="uk-height-1-1" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Log In</title>
-    <meta charset="UTF-8"/>
-    <div th:include="fragments/header :: head"></div>
-
-    <!--<link rel="stylesheet" type="text/css"-->
-          <!--href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>-->
-    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
-
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/transition.js"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/form.js"></script>-->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/semantic.min.js"></script>
-    <script src="/js/semantic/transition.js"></script>
-    <script src="/js/semantic/form.js"></script>
-
-    <style type="text/css">
-        body {
-            overflow-x: hidden;
-            min-width: auto;
-        }
-
-        .column {
-            max-width: 450px;
-        }
-    </style>
-
-    <script>
-        $(document)
-            .ready(function () {
-                $('.ui.form')
-                    .form({
-                        fields: {
-                            login: {
-                                identifier: 'login',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Please enter your login'
-                                    }
-                                ]
-                            },
-                            password: {
-                                identifier: 'password',
-                                rules: [
-                                    {
-                                        type: 'empty',
-                                        prompt: 'Please enter your password'
-                                    }
-                                ]
-                            }
-                        }
-                    })
-                ;
-            })
-        ;
-    </script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Login</title>
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/css/uikit.min.css"/>
 </head>
-
-<body>
-<div class="ui middle aligned center aligned grid">
-    <div class="column">
-        <h2 class="ui blue image header">LOG IN</h2>
-        <form class="ui large form" th:method="post">
-            <div class="ui fluid segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" name="login" placeholder="login"/>
+<body class="uk-height-1-1">
+<div class="uk-flex uk-flex-center uk-flex-middle uk-background-muted uk-height-viewport">
+    <!--<div class="uk-position-bottom-center uk-position-small uk-visible@m">
+        <span class="uk-text-small uk-text-muted">Not with us yet? <span th:href="@{/register}">Create Account</span></span>
+    </div>-->
+    <div class="uk-width-medium uk-padding-small">
+        <form th:method="post">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Login</legend>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                        <input name="login" class="uk-input" required="required" placeholder="username" type="text"/>
                     </div>
                 </div>
-                <div class="field" align="left">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="password"/>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                        <input name="password" class="uk-input" required="required" placeholder="password" type="password"/>
                     </div>
                 </div>
-                <input type="submit" th:value="LOGIN" class="ui blue fluid large submit button"/>
-                <!--<div class="ui divider"></div>-->
-                <!--<div class="ui checkbox">
-                    <input type="checkbox" name="remember-me" id="remember-me-checkbox"/>
-                    <label for="remember-me-checkbox" style="cursor: pointer">REMEMBER ME</label>
-                </div>-->
-                <div class="ui horizontal divider" >via Social Networks</div>
-                <!--<div>Or login via Social Networks</div>-->
-                <!--<br/>-->
-                <a th:href="@{/}" class="ui circular vk icon button">
-                    <i class="vk icon"></i>
-                </a>
-                <a th:href="@{/}" class="ui circular facebook icon button">
-                    <i class="facebook icon"></i>
-                </a>
-                <a th:href="@{/}" class="ui circular twitter icon button">
-                    <i class="twitter icon"></i>
-                </a>
-            </div>
-            <div class="ui error message"></div>
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-primary uk-button-primary uk-width-1-1">LOG IN</button>
+                </div>
+            </fieldset>
         </form>
-        <div class="ui warning message">
-            <!--Already signed up? <a href="#">Login here</a> instead.-->
-            Not with us yet? <a th:href="@{/register}"><strong>Create Account</strong></a>
-        </div>
-        <!--<div class="ui message">
-            <div class="header">
-                Login via Social Networks
+        <div>
+            <div class="uk-text-center">
+                <a class="uk-link-reset uk-text-small" data-uk-toggle="target: #recover;animation: uk-animation-slide-top-small">Forgot your password?</a>
             </div>
-            <div class="ui divider"></div>
-            <button class="ui circular vk icon button">
-                <i class="vk icon"></i>
-            </button>
-            <button class="ui circular facebook icon button">
-                <i class="facebook icon"></i>
-            </button>
-            <button class="ui circular twitter icon button">
-                <i class="twitter icon"></i>
-            </button>
-        </div>-->
+            <div class="uk-margin-small-top" id="recover" hidden="hidden">
+                <form action="login.html">
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail"></span>
+                            <input class="uk-input" placeholder="e-mail" required="required" type="text"/>
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <button type="submit" class="uk-button uk-button-primary uk-button-primary uk-width-1-1">SEND PASSWORD</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <div class="uk-text-center">
+            <p>You don't have an account yet?</p>
+            <a th:href="@{/register}" class="uk-button uk-button-secondary">
+                <span class="ion-android-person-add"></span>&nbsp; Register
+            </a>
+        </div>
     </div>
 </div>
+
+<!-- JS FILES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/js/uikit-icons.min.js"></script>
 </body>
 </html>

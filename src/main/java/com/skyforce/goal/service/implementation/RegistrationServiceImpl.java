@@ -2,6 +2,7 @@ package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.exception.EmailExistsException;
 import com.skyforce.goal.form.UserRegistrationForm;
+import com.skyforce.goal.model.Image;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
@@ -23,10 +24,13 @@ import java.util.concurrent.Executors;
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private SmtpMailSender mailSender;
+
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     @Override
@@ -35,7 +39,12 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new EmailExistsException("There is an account with that e-mail address: " +
                     userRegistrationForm.getEmail());
         }
+
         UserState userState = userRegistrationForm.isCheckEmail() ? UserState.NOT_ACTIVE : UserState.ACTIVE;
+
+        Image image = Image.builder()
+                .id(8L)
+                .build();
 
         User newUser = User.builder()
                 .login(userRegistrationForm.getLogin())
@@ -45,6 +54,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .role(UserRole.USER)
                 .state(userState)
                 .uuid(UUID.randomUUID().toString())
+                .image(image)
                 .build();
 
         userRepository.save(newUser);

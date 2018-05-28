@@ -26,15 +26,7 @@ public class App {
     private static GoalStatusUtil goalStatusUtil;
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(App.class, args);
-        //Todo
-        blockioWebsocket = context.getBean(BlockioWebsocket.class);
-        blockioWebsocket.connect();
-        MoneySyncService moneySyncService = context.getBean(MoneySyncService.class);
-        moneySyncService.updateTransactions();
-        GoalStatusUtil goalStatusUtil = context.getBean(GoalStatusUtil.class);
-        goalStatusUtil.update();
-        goalStatusUtil.enableRegulularUpdate();
+        SpringApplication.run(App.class);
     }
 
     @Bean

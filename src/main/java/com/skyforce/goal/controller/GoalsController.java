@@ -20,9 +20,6 @@ public class GoalsController {
     @Autowired
     private GoalService goalService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/goals")
     public String getGoalsPage(Authentication authentication, Model model) {
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
@@ -31,12 +28,21 @@ public class GoalsController {
         return "goals";
     }
 
+    @GetMapping("/goal/new")
+    public String getGoalCreatePage(Authentication authentication, Model model) {
+        model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
+
+        return "new-goal";
+    }
+
     @GetMapping("/goal/{id}")
     public String getGoalPage(Authentication authentication, Model model, @PathVariable("id") Long id) {
         Goal goal = goalService.findGoalById(id);
+
         model.addAttribute("goal", goal);
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
-//        model.addAttribute("user", userService.findUserByLogin(login));
+        model.addAttribute("all", goalService.findGoalsByUser(goal.getUser()));
+
         return "goal";
     }
 

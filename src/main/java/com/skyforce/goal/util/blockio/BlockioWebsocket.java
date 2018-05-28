@@ -16,7 +16,6 @@ import java.net.URI;
 @Component
 @Scope("singleton")
 public class BlockioWebsocket extends WebSocketClient {
-
     private final Gson gson;
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
