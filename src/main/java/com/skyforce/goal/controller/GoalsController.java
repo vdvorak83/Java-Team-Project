@@ -4,7 +4,6 @@ import com.skyforce.goal.model.Goal;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.GoalService;
-import com.skyforce.goal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

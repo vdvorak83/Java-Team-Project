@@ -26,6 +26,13 @@ public class UserRegistrationForm {
     private String password;
 
     @NotNull
+    @Size(min = 3)
+    private String firstName;
+
+    @NotNull
+    private String lastName;
+
+    @NotNull
     private String matchingPassword;
 
     private boolean checkEmail;

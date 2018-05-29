@@ -4,6 +4,7 @@ import com.skyforce.goal.exception.EmailExistsException;
 import com.skyforce.goal.form.UserRegistrationForm;
 import com.skyforce.goal.model.Image;
 import com.skyforce.goal.model.User;
+import com.skyforce.goal.model.Wallet;
 import com.skyforce.goal.repository.UserRepository;
 import com.skyforce.goal.security.role.UserRole;
 import com.skyforce.goal.security.state.UserState;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,7 +51,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         User newUser = User.builder()
                 .login(userRegistrationForm.getLogin())
                 .email(userRegistrationForm.getEmail())
+                .firstName(userRegistrationForm.getFirstName())
+                .lastName(userRegistrationForm.getLastName())
                 .password(passwordEncoder.encode(userRegistrationForm.getPassword()))
+                //.wallet(new Wallet()) //TODO
+                .money(new BigDecimal(0.00))
                 .regDate(new Date())
                 .role(UserRole.USER)
                 .state(userState)

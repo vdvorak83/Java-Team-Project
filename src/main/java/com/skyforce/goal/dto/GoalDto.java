@@ -1,6 +1,5 @@
 package com.skyforce.goal.dto;
 
-import com.skyforce.goal.model.Checkpoint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

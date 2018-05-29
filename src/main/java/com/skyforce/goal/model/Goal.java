@@ -34,6 +34,9 @@ public class Goal {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "accomplishment_criteria")
+    private String accomplishmentCriteria;
+
     @Column(name = "description")
     private String description;
 

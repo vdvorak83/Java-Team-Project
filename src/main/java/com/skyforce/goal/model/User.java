@@ -30,6 +30,12 @@ public class User {
     @Column(name = "login")
     private String login;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "password")
     private String password;
 
@@ -80,4 +86,10 @@ public class User {
     @JoinTable(name = "users_followings", joinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<User> follows;
+
+    @Column(name = "instagram_link")
+    private String instagramLink;
+
+    @Column(name = "twitter_link")
+    private String twitterLink;
 }
