@@ -33,8 +33,8 @@
                             <div>
                                 <a class="uk-navbar-toggle" data-uk-icon="icon: search" href="#"></a>
                                 <div class="uk-drop" data-uk-drop="mode: click; pos: right-center; offset: 0; boundary: #navbar">
-                                    <form action="article.html" class="uk-search uk-search-navbar uk-search-small uk-width-1-1">
-                                        <input class="uk-search-input" type="search" placeholder="Search...">
+                                    <form th:action="@{/search}" class="uk-search uk-search-navbar uk-search-small uk-width-1-1">
+                                        <input class="uk-search-input" th:name="query" type="search" placeholder="Search..."/>
                                     </form>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                 <div class="uk-navbar-right">
 
                     <div class="uk-navbar-item">
-                        <a class="uk-navbar-toggle uk-hidden@m" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a>
+                        <a class="uk-navbar-toggle uk-hidden@m" data-uk-toggle="data-uk-toggle" data-uk-navbar-toggle-icon="data-uk-navbar-toggle-icon" href="#offcanvas-nav"></a>
                         <a th:href="@{/goal/new}" class="uk-button uk-button-default uk-visible@m">NEW GOAL</a>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                             </div>-->
                             <div class="uk-card-media">
                                 <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                                    <a th:href="@{'/goal/' + ${goal.getId()}}"><img data-uk-img alt="" src="https://picsum.photos/400/300/?random="></a>
+                                    <a th:href="@{'/goal/' + ${goal.getId()}}"><img data-uk-img="data-uk-img" alt="" src="https://picsum.photos/400/300/?random="/></a>
                                     <!--<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
                                         <span data-uk-icon="icon:users; ratio: 0.8"></span><span th:text="' ' + ${user.getFollows().size()} + ' followers '"></span><span data-uk-icon="icon:bookmark; ratio: 0.8"></span><span th:text="' ' + ${user.getGoals().size()} + ' goals'"></span>
                                     </div>-->
@@ -91,10 +91,10 @@
                             </div>
                             <div class="uk-card-body">
                                 <a th:href="@{'/goal/' + ${goal.getId()}}"><h6 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold uk-text-uppercase" th:text="${goal.getName()}">LOREM IPSUM SIT</h6></a>
-                                <p class="uk-text-small uk-text-muted" th:text="'Registration Date: ' + ${goal.getDescription()} + ' '">Duis aute irure dolor in reprehenderit in voluptate velit</p>
+                                <p class="uk-text-small uk-text-muted" th:text="'Registration Date: ' + ${goal.getUser().getRegDate()} + ' '">Duis aute irure dolor in reprehenderit in voluptate velit</p>
                             </div>
                             <div class="uk-card-footer">
-                                <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
+                                <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid="data-uk-grid">
                                     <div class="uk-width-expand uk-text-small" th:text="${goal.getUser().getFirstName() + ' ' + goal.getUser().getLastName()}">
                                         John Doe
                                     </div>
@@ -119,7 +119,7 @@
     <!-- OFFCANVAS -->
     <div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: true">
         <div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">
-            <button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close></button>
+            <button class="uk-offcanvas-close uk-close uk-icon" type="button" data-uk-close="data-uk-close"></button>
             <ul class="uk-nav uk-nav-default">
                 <li class="uk-active"><a href="#">Active</a></li>
                 <li class="uk-parent">

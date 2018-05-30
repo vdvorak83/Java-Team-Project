@@ -2,6 +2,8 @@ package com.skyforce.goal.model;
 
 import com.skyforce.goal.model.enums.GoalState;
 import lombok.*;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +18,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 
+@Indexed
 @Entity
 @Table(name = "goals")
 public class Goal {
@@ -31,6 +34,7 @@ public class Goal {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Field
     @Column(name = "name")
     private String name;
 

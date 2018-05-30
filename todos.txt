@@ -1,0 +1,16 @@
+fix search view:
+    change title and PEOPLE | GOALS to SEARCH RESULTS
+
+rewrite profile.html
+
+StacySiz rewrite main page
+
+finish create new goal page
+
+upload image for goals
+
+finish writing goal page
+
+sent screenshots of different pages
+
+rewrite money page

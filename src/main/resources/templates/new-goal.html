@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>New Goal</title>
     <!-- CSS FILES -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/css/uikit.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.42/css/uikit.min.css"/>
 </head>
 <body>
 <div class="uk-offcanvas-content">
@@ -37,8 +36,8 @@
                             <div>
                                 <a class="uk-navbar-toggle" data-uk-icon="icon: search" href="#"></a>
                                 <div class="uk-drop" data-uk-drop="mode: click; pos: right-center; offset: 0; boundary: #navbar">
-                                    <form action="article.html" class="uk-search uk-search-navbar uk-search-small uk-width-1-1">
-                                        <input class="uk-search-input" type="search" placeholder="Search...">
+                                    <form th:action="@{/search}" class="uk-search uk-search-navbar uk-search-small uk-width-1-1">
+                                        <input class="uk-search-input" th:name="query" type="search" placeholder="Search..."/>
                                     </form>
                                 </div>
                             </div>
@@ -51,7 +50,7 @@
                 <div class="uk-navbar-right">
 
                     <div class="uk-navbar-item">
-                        <a class="uk-navbar-toggle uk-hidden@m" data-uk-toggle data-uk-navbar-toggle-icon
+                        <a class="uk-navbar-toggle uk-hidden@m" data-uk-toggle="data-uk-toggle" data-uk-navbar-toggle-icon="data-uk-navbar-toggle-icon"
                            href="#offcanvas-nav"></a>
                         <a href="#" class="uk-button uk-button-default uk-visible@m">PUBLISH</a>
                     </div>
@@ -62,26 +61,38 @@
     <!--/HEADER-->
     <!--GOAL FORM-->
     <section class="uk-section uk-section-small">
-        <form class="uk-form-horizontal uk-margin-xlarge-left uk-margin-xlarge-right">
+        <form class="uk-form-horizontal uk-margin-xlarge-left uk-margin-xlarge-right" th:object="${goal}" method="post">
             <div class="uk-margin">
                 <label class="uk-form-label uk-text-middle uk-text-middle" for="goal-name">OUTLINE YOUR GOAL</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="goal-name" type="text" placeholder="e.g. Buy MacBook..."/>
+                    <input th:field="*{goalName}" class="uk-input" id="goal-name" type="text" placeholder="e.g. Buy MacBook..."/>
                 </div>
             </div>
             <div class="uk-margin">
                 <label class="uk-form-label uk-text-middle uk-text-middle" for="goal-criteria">ACCOMPLISHMENT CRITERIA</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="goal-criteria" type="text" placeholder="e.g. MacBook is bought..."/>
+                    <input th:field="*{accomplishmentCriteria}" class="uk-input" id="goal-criteria" type="text" placeholder="e.g. MacBook is bought..."/>
                 </div>
             </div>
             <div class="uk-margin">
                 <label class="uk-form-label uk-text-middle uk-text-middle" for="goal-description">DESCRIPTION</label>
                 <div class="uk-form-controls">
-                    <textarea class="uk-textarea autoexpand" id="goal-description" data-min-rows="5" style="resize: vertical; min-height: 120px"></textarea>
+                    <textarea th:field="*{description}" class="uk-textarea autoexpand" id="goal-description" data-min-rows="5" style="resize: vertical; min-height: 120px"></textarea>
+                </div>
+            </div>
+            <label class="uk-form-label uk-text-middle uk-text-middle uk-margin-small-right" for="goal-image">IMAGE</label>
+            <div class="uk-margin">
+                <div uk-form-custom="target: true">
+                    <input th:field="*{image}" name="file" type="file" id="file" accept="image/*"/>
+                    <input class="uk-input uk-form-width-large" type="text" id="goal-image" placeholder="Select Image" disabled="disabled"/>
                 </div>
             </div>
 
+            <div class="uk-margin">
+                <div class="uk-form-controls">
+                    <input class="uk-button uk-button-primary" type="submit" value="CREATE GOAL"/>
+                </div>
+            </div>
         </form>
 
         <!--<form class="uk-form-horizontal uk-margin-large">

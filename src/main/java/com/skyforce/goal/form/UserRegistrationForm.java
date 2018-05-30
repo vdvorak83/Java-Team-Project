@@ -39,5 +39,4 @@ public class UserRegistrationForm {
 
     @ValidEmail
     private String email;
-
 }

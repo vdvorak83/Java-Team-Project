@@ -1,4 +1,4 @@
--- User roles: Admin, Moderator, Normal user etc.
+/*-- User roles: Admin, Moderator, Normal user etc.
 create table if not exists user_roles
 (
 	id serial not null
@@ -281,4 +281,4 @@ INSERT INTO transaction_states (id, name)
 
 INSERT INTO transaction_states (id, name)
   SELECT 3, 'Receive failed'
-  WHERE NOT EXISTS (SELECT name FROM transaction_states WHERE name = 'Sent');
+  WHERE NOT EXISTS (SELECT name FROM transaction_states WHERE name = 'Sent');*/

@@ -1,16 +1,14 @@
 package com.skyforce.goal.service.implementation;
 
 import com.skyforce.goal.dto.GoalDto;
-import com.skyforce.goal.model.Checkpoint;
-import com.skyforce.goal.model.Goal;
-import com.skyforce.goal.model.MoneyHistoryEntry;
-import com.skyforce.goal.model.User;
+import com.skyforce.goal.model.*;
 import com.skyforce.goal.model.enums.MoneyDirection;
 import com.skyforce.goal.repository.GoalRepository;
 import com.skyforce.goal.repository.MoneyHistoryEntryRepository;
 import com.skyforce.goal.model.enums.GoalState;
 import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.GoalService;
+import com.skyforce.goal.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -27,13 +25,15 @@ public class GoalServiceImpl implements GoalService {
     private final GoalRepository goalRepository;
     private final AuthenticationService authenticationService;
     private final MoneyHistoryEntryRepository moneyHistoryEntryRepository;
+    private final ImageService imageService;
 
     @Autowired
     public GoalServiceImpl(GoalRepository goalRepository, AuthenticationService authenticationService,
-                           MoneyHistoryEntryRepository moneyHistoryEntryRepository) {
+                           MoneyHistoryEntryRepository moneyHistoryEntryRepository, ImageService imageService) {
         this.goalRepository = goalRepository;
         this.authenticationService = authenticationService;
         this.moneyHistoryEntryRepository = moneyHistoryEntryRepository;
+        this.imageService = imageService;
     }
 
     @Override
@@ -92,6 +92,20 @@ public class GoalServiceImpl implements GoalService {
     @Override
     public Goal findGoalById(Long id) {
         return goalRepository.findGoalById(id);
+    }
+
+    @Override
+    public void save(Authentication authentication, GoalDto goalDto, Image image) {
+        Goal goal = Goal.builder()
+                .name(goalDto.getGoalName())
+                .description(goalDto.getDescription())
+                .accomplishmentCriteria(goalDto.getAccomplishmentCriteria())
+                .image(image)
+                .user(authenticationService.getUserByAuthentication(authentication))
+                .dateStart(new Date())
+                .build();
+
+        goalRepository.save(goal);
     }
 
 

@@ -1,3 +1,4 @@
+/*
 package com.skyforce.goal.validator;
 
 import com.skyforce.goal.dto.GoalDto;
@@ -33,3 +34,4 @@ public class GoalFormValidator implements Validator {
                 "Description can't be empty!");
     }
 }
+*/

@@ -1,5 +1,6 @@
 package com.skyforce.goal.dto;
 
+import com.skyforce.goal.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,14 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class GoalDto {
     private String goalName;
+    private String accomplishmentCriteria;
     private String description;
     private BigDecimal price;
     private Date dateEnd;
     private String checkpointName;
     private String checkpointDescription;
+    private Image image;
 }

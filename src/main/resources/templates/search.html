@@ -42,7 +42,7 @@
                     </ul>
                 </div>
                 <div class="uk-navbar-center">
-                    <a class="uk-navbar-item uk-logo" th:href="@{/people}"><strong>PEOPLE</strong></a> | <a class="uk-navbar-item uk-logo" th:href="@{/goals}">GOALS</a>
+                    <a class="uk-navbar-item uk-logo" th:href="@{/people}">PEOPLE</a> | <a class="uk-navbar-item uk-logo"><strong>SEARCH</strong></a> | <a class="uk-navbar-item uk-logo" th:href="@{/goals}">GOALS</a>
                 </div>
                 <div class="uk-navbar-right">
 
@@ -56,67 +56,71 @@
     </header>
     <!--/HEADER-->
     <!--AUTHOR-->
+    <th:block th:if="${#lists.isEmpty(goalSearchResults)}">
+        <h2 class="uk-text-lead uk-text-middle uk-text-center uk-margin-large-top uk-text-muted">No results by query <span th:text="${#httpServletRequest.getParameter('query')}"></span></h2>
+        <h2 class="uk-text-lead uk-text-middle uk-text-center uk-text-muted">Go to <a th:href="@{/goals}">catalog</a>?</h2>
+    </th:block>
     <section class="uk-section uk-section-small uk-section-default uk-padding-remove-bottom" data-uk-filter="target: .js-filter">
+
         <div class="uk-container uk-container-expand uk-margin-large-bottom">
-<!--            <ul class="uk-subnav uk-subnav-pill">
-                <li class="uk-active" data-uk-filter-control><a href="#">Show All</a></li>
-                <li data-uk-filter-control=".nature-card"><a href="#">Nature</a></li>
-                <li data-uk-filter-control=".music-card"><a href="#">Music</a></li>
-                <li data-uk-filter-control=".photo-card"><a href="#">Photography</a></li>
-                <li data-uk-filter-control=".design-card"><a href="#">Design</a></li>
-            </ul>-->
+            <!--            <ul class="uk-subnav uk-subnav-pill">
+                            <li class="uk-active" data-uk-filter-control><a href="#">Show All</a></li>
+                            <li data-uk-filter-control=".nature-card"><a href="#">Nature</a></li>
+                            <li data-uk-filter-control=".music-card"><a href="#">Music</a></li>
+                            <li data-uk-filter-control=".photo-card"><a href="#">Photography</a></li>
+                            <li data-uk-filter-control=".design-card"><a href="#">Design</a></li>
+                        </ul>-->
             <div class="uk-grid uk-grid-medium uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-6@xl uk-grid-match js-filter" data-uk-grid="masonry: true">
                 <!-- card -->
-                <th:block th:each="user : ${people}" >
-                <div class="nature-card" >
-                    <div class="uk-card uk-card-small uk-card-default">
-                        <!--<div class="uk-card-header">
-                            <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
-                                <div class="uk-width-expand">
-                                    <span class="cat-txt">Nature / Outdoor</span>
+                <th:block th:if="${not #lists.isEmpty(goalSearchResults)}" th:each="goal : ${goalSearchResults}" >
+                    <div class="nature-card" >
+                        <div class="uk-card uk-card-small uk-card-default">
+                            <!--<div class="uk-card-header">
+                                <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
+                                    <div class="uk-width-expand">
+                                        <span class="cat-txt">Nature / Outdoor</span>
+                                    </div>
+                                    <div class="uk-width-auto uk-text-right uk-text-muted">
+                                        <span data-uk-icon="icon:clock; ratio: 0.8"></span> 3 min.
+                                    </div>
                                 </div>
-                                <div class="uk-width-auto uk-text-right uk-text-muted">
-                                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> 3 min.
+                            </div>-->
+                            <div class="uk-card-media">
+                                <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
+                                    <a th:href="@{'/goal/' + ${goal.getId()}}"><img data-uk-img="data-uk-img" alt="" src="https://picsum.photos/400/300/?random="/></a>
+                                    <!--<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
+                                        <span data-uk-icon="icon:users; ratio: 0.8"></span><span th:text="' ' + ${user.getFollows().size()} + ' followers '"></span><span data-uk-icon="icon:bookmark; ratio: 0.8"></span><span th:text="' ' + ${user.getGoals().size()} + ' goals'"></span>
+                                    </div>-->
                                 </div>
-                            </div>
-                        </div>-->
-                        <div class="uk-card-media">
-                            <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                                <a th:href="@{'/user/' + ${user.getLogin()}}"><img th:src="@{'~/storage/' + ${user.getImage().getFileName()}}" data-uk-img="data-uk-img" alt="" src="img/transp.gif"/></a>
-                                <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
-                                    <span data-uk-icon="icon:users; ratio: 0.8"></span><span th:text="' ' + ${user.getFollows().size()} + ' followers '"></span><span data-uk-icon="icon:bookmark; ratio: 0.8"></span><span th:text="' ' + ${user.getGoals().size()} + ' goals'"></span>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="uk-card-body">
-                            <a th:href="@{'/user/' + ${user.getLogin()}}"><h6 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold uk-text-uppercase" th:text="${user.getLogin()}">LOREM IPSUM SIT</h6></a>
-                            <p class="uk-text-small uk-text-muted" th:text="'Registration Date: ' + ${user.getRegDate()} + ' '">Duis aute irure dolor in reprehenderit in voluptate velit</p>
-                        </div>
-                        <div class="uk-card-footer">
-                            <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid="data-uk-grid">
-                                <div class="uk-width-expand uk-text-small" th:text="${user.getFirstName() + ' ' + user.getLastName()}">
-                                    John Doe
-                                </div>
-                                <div class="uk-width-auto uk-text-right">
-                                    <th:block th:if="${user.getTwitterLink() != null}">
-                                        <a th:href="@{'https://twitter.com/' + ${user.getTwitterLink()}}" th:target="_blank" data-uk-tooltip="title: Twitter" class="uk-icon-link" data-uk-icon="icon:twitter; ratio: 0.8"></a>
-                                    </th:block>
-                                    <th:block th:if="${user.getInstagramLink() != null}">
-                                        <a th:href="@{'https://instagram.com/' + ${user.getInstagramLink()}}" th:target="_blank" data-uk-tooltip="title: Instagram" class="uk-icon-link" data-uk-icon="icon:instagram; ratio: 0.8"></a>
-                                    </th:block>
+                            </div>
+                            <div class="uk-card-body">
+                                <a th:href="@{'/goal/' + ${goal.getId()}}"><h6 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold uk-text-uppercase" th:text="${goal.getName()}">LOREM IPSUM SIT</h6></a>
+                                <p class="uk-text-small uk-text-muted" th:text="'Registration Date: ' + ${goal.getDescription()} + ' '">Duis aute irure dolor in reprehenderit in voluptate velit</p>
+                            </div>
+                            <div class="uk-card-footer">
+                                <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid="data-uk-grid">
+                                    <div class="uk-width-expand uk-text-small" th:text="${goal.getUser().getFirstName() + ' ' + goal.getUser().getLastName()}">
+                                        John Doe
+                                    </div>
+                                    <!--<div class="uk-width-auto uk-text-right">
+                                        <th:block th:if="${user.getTwitterLink() != null}">
+                                            <a th:href="@{'https://twitter.com/' + ${user.getTwitterLink()}}" th:target="_blank" data-uk-tooltip="title: Twitter" class="uk-icon-link" data-uk-icon="icon:twitter; ratio: 0.8"></a>
+                                        </th:block>
+                                        <th:block th:if="${user.getInstagramLink() != null}">
+                                            <a th:href="@{'https://instagram.com/' + ${user.getInstagramLink()}}" th:target="_blank" data-uk-tooltip="title: Instagram" class="uk-icon-link" data-uk-icon="icon:instagram; ratio: 0.8"></a>
+                                        </th:block>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </th:block>
                 <!-- /card -->
-
-
             </div>
         </div>
     </section>
+    <!--/GOALS-->
     <!-- OFFCANVAS -->
     <div id="offcanvas-nav" data-uk-offcanvas="flip: true; overlay: true">
         <div class="uk-offcanvas-bar uk-offcanvas-bar-animation uk-offcanvas-slide">

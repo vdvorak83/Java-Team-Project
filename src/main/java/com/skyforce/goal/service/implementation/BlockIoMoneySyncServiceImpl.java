@@ -244,9 +244,12 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
                     transactionRepository.save(transaction);
             }
         } else {
-            transactionRepository.saveAll(transactions);
+            //transactionRepository.saveAll(transactions);
+            saveAll(transactions);
         }
     }
+
+
 
     @Override
     public void resyncTransactions() {
@@ -270,5 +273,10 @@ public class BlockIoMoneySyncServiceImpl implements MoneySyncService {
         }
         walletRepository.save(wallet);
         return wallet;
+    }
+
+    @Override
+    public void saveAll(List<Transaction> transactions) {
+        transactionRepository.save(transactions);
     }
 }

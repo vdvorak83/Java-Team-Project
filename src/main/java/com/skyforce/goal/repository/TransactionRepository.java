@@ -13,4 +13,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAllByDateAndState(Date date, TransactionState state);
 
     Transaction findFirst1ByStateOrderByDateDesc(TransactionState state);
+
+    //void saveAll(List<Transaction> transactions);
 }

@@ -2,6 +2,7 @@ package com.skyforce.goal.service;
 
 import com.skyforce.goal.dto.GoalDto;
 import com.skyforce.goal.model.Goal;
+import com.skyforce.goal.model.Image;
 import com.skyforce.goal.model.User;
 import org.springframework.security.core.Authentication;
 
@@ -15,4 +16,6 @@ public interface GoalService {
     List<Goal> findGoalsByUser(User user);
 
     Goal findGoalById(Long id);
+
+    void save(Authentication authentication, GoalDto goalDto, Image image);
 }
